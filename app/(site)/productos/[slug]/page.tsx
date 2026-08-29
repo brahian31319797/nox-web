@@ -1,14 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeftIcon,
-  BoltSpecIcon,
-  CoinsIcon,
-  InstagramIcon,
-  VehicleIcon,
-  WhatsAppIcon,
-} from "@/components/site/icons";
+import { ArrowLeftIcon, BoltSpecIcon, CoinsIcon, InstagramIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ProductGallery } from "@/components/site/ProductGallery";
 import { fmtArs, fmtUsd } from "@/lib/format";
 import { getProductoBySlug } from "@/lib/productos";
 import { buildProductWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
@@ -24,8 +17,6 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
   const producto = await getProductoBySlug(slug);
   if (!producto) notFound();
 
-  const tieneFotos = producto.imagenes.length > 0;
-
   return (
     <main className="mx-auto max-w-[1180px] px-5 pb-16 pt-8">
       <Link
@@ -37,18 +28,12 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
       </Link>
 
       <div className="grid gap-9 md:grid-cols-2">
-        <div>
-          <div className="relative grid aspect-[4/3.2] place-items-center overflow-hidden rounded-[26px] border border-[var(--line)] bg-[radial-gradient(120%_100%_at_50%_10%,var(--surface-3),var(--surface-2))]">
-            <span className="absolute left-4 top-4 rounded-full bg-[var(--accent)] px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-[var(--accent-ink)]">
-              {producto.etiqueta ?? producto.categoria.nombre}
-            </span>
-            {tieneFotos ? (
-              <Image src={producto.imagenes[0]} alt={producto.nombre} fill className="object-cover" />
-            ) : (
-              <VehicleIcon categoria={producto.categoria.slug} className="w-[76%] text-[var(--ink)]" />
-            )}
-          </div>
-        </div>
+        <ProductGallery
+          imagenes={producto.imagenes}
+          nombre={producto.nombre}
+          categoria={producto.categoria}
+          etiqueta={producto.etiqueta}
+        />
 
         <div>
           <span className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-[var(--accent-2)]">

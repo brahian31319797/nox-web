@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { ArrowLeftIcon } from "@/components/site/icons";
 import { AlertIcon, CheckIcon, PlusIcon, UploadIcon } from "@/components/admin/icons";
 import { actualizarProducto, crearProducto } from "@/lib/actions/productos";
+import { centsToDecimalDisplay, digitsFromInput } from "@/lib/format";
 import { slugify } from "@/lib/schemas";
 import { subirImagenProducto } from "@/lib/upload";
 import type { Categoria, Producto, Spec } from "@/lib/types";
@@ -22,8 +23,12 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
   const [categoriaId, setCategoriaId] = useState(producto?.categoria_id ?? categorias[0]?.id ?? "");
   const [etiqueta, setEtiqueta] = useState(producto?.etiqueta ?? "");
   const [descripcion, setDescripcion] = useState(producto?.descripcion ?? "");
-  const [precioArs, setPrecioArs] = useState(String(producto?.precio_ars ?? ""));
-  const [precioUsd, setPrecioUsd] = useState(String(producto?.precio_usd ?? ""));
+  const [precioArsCents, setPrecioArsCents] = useState(() =>
+    String(Math.round((producto?.precio_ars ?? 0) * 100))
+  );
+  const [precioUsdCents, setPrecioUsdCents] = useState(() =>
+    String(Math.round((producto?.precio_usd ?? 0) * 100))
+  );
   const [specs, setSpecs] = useState<Spec[]>(producto?.specs ?? [{ label: "", value: "" }]);
   const [imagenes, setImagenes] = useState<string[]>(producto?.imagenes ?? []);
   const [publicado, setPublicado] = useState(producto?.publicado ?? true);
@@ -66,8 +71,8 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
       categoria_id: categoriaId,
       etiqueta: etiqueta.trim() || null,
       descripcion: descripcion.trim() || null,
-      precio_ars: precioArs,
-      precio_usd: precioUsd,
+      precio_ars: Number(precioArsCents) / 100,
+      precio_usd: Number(precioUsdCents) / 100,
       specs: specs.filter((s) => s.label.trim() && s.value.trim()),
       imagenes,
       publicado,
@@ -174,15 +179,15 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
               </div>
               <button
                 type="button"
+                role="switch"
+                aria-checked={publicado}
                 onClick={() => setPublicado((v) => !v)}
-                className={`relative h-[26px] w-11 flex-none rounded-full border transition-colors ${
-                  publicado ? "border-[var(--ok)] bg-[var(--ok-soft)]" : "border-[var(--line)] bg-[var(--surface-3)]"
+                className={`flex h-[26px] w-11 flex-none items-center rounded-full p-[3px] transition-colors ${
+                  publicado ? "justify-end bg-[var(--ok-soft)]" : "justify-start bg-[var(--surface-3)]"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full transition-transform ${
-                    publicado ? "translate-x-[18px] bg-[var(--ok)]" : "translate-x-0.5 bg-[var(--ink-faint)]"
-                  }`}
+                  className={`h-5 w-5 rounded-full transition-colors ${publicado ? "bg-[var(--ok)]" : "bg-[var(--ink-faint)]"}`}
                 />
               </button>
             </div>
@@ -259,23 +264,21 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
               <Field label="Precio en pesos" prefix="$">
                 <input
                   required
-                  type="number"
-                  min={0}
-                  value={precioArs}
-                  onChange={(e) => setPrecioArs(e.target.value)}
-                  placeholder="1236800"
-                  className="h-full w-full bg-transparent text-[14.5px] outline-none placeholder:text-[var(--ink-faint)]"
+                  type="text"
+                  inputMode="numeric"
+                  value={centsToDecimalDisplay(precioArsCents)}
+                  onChange={(e) => setPrecioArsCents(digitsFromInput(e.target.value))}
+                  className="h-full w-full bg-transparent text-right text-[14.5px] tabular-nums outline-none"
                 />
               </Field>
               <Field label="Precio en dólares" prefix="US$">
                 <input
                   required
-                  type="number"
-                  min={0}
-                  value={precioUsd}
-                  onChange={(e) => setPrecioUsd(e.target.value)}
-                  placeholder="980"
-                  className="h-full w-full bg-transparent text-[14.5px] outline-none placeholder:text-[var(--ink-faint)]"
+                  type="text"
+                  inputMode="numeric"
+                  value={centsToDecimalDisplay(precioUsdCents)}
+                  onChange={(e) => setPrecioUsdCents(digitsFromInput(e.target.value))}
+                  className="h-full w-full bg-transparent text-right text-[14.5px] tabular-nums outline-none"
                 />
               </Field>
             </div>
