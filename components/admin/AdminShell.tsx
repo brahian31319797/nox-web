@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
-import { BoltIcon } from "@/components/site/icons";
+import { LogoMark } from "@/components/brand/Logo";
 import { ExternalLinkIcon, GridIcon, ListIcon, LogOutIcon } from "@/components/admin/icons";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
@@ -39,9 +39,7 @@ export function AdminShell({
       {/* Topbar mobile */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-[var(--line)] bg-[var(--surface)] px-4 py-3 md:hidden">
         <div className="flex items-center gap-2.5">
-          <span className="grid h-7 w-7 flex-none place-items-center rounded-lg bg-[var(--accent)] text-[var(--accent-ink)]">
-            <BoltIcon className="h-[15px] w-[15px]" />
-          </span>
+          <LogoMark className="h-7 w-7 flex-none" />
           <b className="font-display text-sm font-extrabold">Brahian González</b>
         </div>
         <button
@@ -70,9 +68,7 @@ export function AdminShell({
         }`}
       >
         <div className="flex items-center gap-2.5 px-2 pb-[22px] pt-1.5">
-          <span className="grid h-8 w-8 flex-none place-items-center rounded-[9px] bg-[var(--accent)] text-[var(--accent-ink)]">
-            <BoltIcon className="h-[17px] w-[17px]" />
-          </span>
+          <LogoMark className="h-8 w-8 flex-none" />
           <div>
             <b className="block font-display text-[14.5px] font-extrabold">Brahian González</b>
             <span className="block font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--ink-faint)]">

@@ -24,9 +24,12 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brahian González — Movilidad Eléctrica",
+  title: {
+    default: "Brahian González — Monopatines, motos y bicis eléctricas",
+    template: "%s — Brahian González",
+  },
   description:
-    "Monopatines, motos y bicicletas eléctricas con envío a todo el país. Consultá por WhatsApp.",
+    "Dejá de pagar por moverte. Monopatines, motos y bicicletas eléctricas con envío a todo el país. Pagás 50% y el resto al recibir. Misiones, Argentina.",
 };
 
 export const viewport: Viewport = {

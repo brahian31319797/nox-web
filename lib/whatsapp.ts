@@ -13,3 +13,15 @@ export function buildProductWhatsAppUrl(producto: { nombre: string; precio_ars: 
   const msg = `¡Hola Brahian! Me interesa el ${producto.nombre} (${fmtArs(producto.precio_ars)}). ¿Está disponible?`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
+
+/** Consulta que arranca desde la calculadora, con la cuenta ya hecha. */
+export function buildAhorroWhatsAppUrl(
+  producto: { nombre: string; precio_ars: number },
+  meses: number
+): string {
+  const msg =
+    `¡Hola Brahian! Hice la cuenta en la web: el ${producto.nombre} ` +
+    `(${fmtArs(producto.precio_ars)}) se me pagaría solo en ${meses} ${meses === 1 ? "mes" : "meses"}. ` +
+    `¿Lo tenés disponible?`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}

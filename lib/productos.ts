@@ -3,27 +3,42 @@ import { CATEGORIAS_SEED, PRODUCTOS_SEED } from "./seed-data";
 import type { Categoria, Producto } from "./types";
 
 /**
- * Mientras no exista un proyecto de Supabase conectado (NEXT_PUBLIC_SUPABASE_URL
- * vacío), el sitio se sirve con lib/seed-data.ts. Ni bien esas variables estén
- * seteadas en .env.local, estas mismas funciones empiezan a leer de la base
- * real sin que haya que tocar ninguna página ni componente.
+ * Regla de oro: los datos de ejemplo (lib/seed-data.ts) son SOLO para levantar
+ * el proyecto en local sin credenciales. Nunca se usan para tapar una falla de
+ * Supabase.
+ *
+ * Por qué: si la base se cae y el sitio sigue mostrando el catálogo de ejemplo,
+ * un cliente consulta por WhatsApp por un producto que no existe, a un precio
+ * que no es. Pasó el 22/09/2026 con el proyecto de Supabase pausado. Ante un
+ * error preferimos una sección vacía y honesta antes que un catálogo inventado.
  */
 const supabaseConfigurado = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
+const usarDatosDeEjemplo = !supabaseConfigurado && process.env.NODE_ENV === "development";
+
+if (!supabaseConfigurado && process.env.NODE_ENV === "production") {
+  // Falta configuración en el deploy: fallar acá es mejor que servir un catálogo falso.
+  throw new Error(
+    "Falta NEXT_PUBLIC_SUPABASE_URL. Configurá las variables de entorno en Vercel antes de desplegar."
+  );
+}
+
+/** true cuando el catálogo que se está sirviendo es de ejemplo, no el real. */
+export const catalogoEsDeEjemplo = usarDatosDeEjemplo;
 
 export async function getCategorias(): Promise<Categoria[]> {
-  if (!supabaseConfigurado) return CATEGORIAS_SEED;
+  if (usarDatosDeEjemplo) return CATEGORIAS_SEED;
 
   const supabase = await createSupabaseServer();
   const { data, error } = await supabase.from("categorias").select("*").order("orden");
   if (error) {
     console.error("[getCategorias]", error.message);
-    return CATEGORIAS_SEED;
+    return [];
   }
   return data as Categoria[];
 }
 
 export async function getProductosPublicados(): Promise<Producto[]> {
-  if (!supabaseConfigurado) return PRODUCTOS_SEED.filter((p) => p.publicado);
+  if (usarDatosDeEjemplo) return PRODUCTOS_SEED.filter((p) => p.publicado);
 
   const supabase = await createSupabaseServer();
   const { data, error } = await supabase
@@ -33,13 +48,13 @@ export async function getProductosPublicados(): Promise<Producto[]> {
     .order("orden");
   if (error) {
     console.error("[getProductosPublicados]", error.message);
-    return PRODUCTOS_SEED.filter((p) => p.publicado);
+    return [];
   }
   return data as Producto[];
 }
 
 export async function getProductoBySlug(slug: string): Promise<Producto | null> {
-  if (!supabaseConfigurado) {
+  if (usarDatosDeEjemplo) {
     return PRODUCTOS_SEED.find((p) => p.slug === slug && p.publicado) ?? null;
   }
 
@@ -59,7 +74,7 @@ export async function getProductoBySlug(slug: string): Promise<Producto | null> 
 
 /** Un producto por id, incluso oculto — solo para el panel admin. */
 export async function getProductoByIdAdmin(id: string): Promise<Producto | null> {
-  if (!supabaseConfigurado) return PRODUCTOS_SEED.find((p) => p.id === id) ?? null;
+  if (usarDatosDeEjemplo) return PRODUCTOS_SEED.find((p) => p.id === id) ?? null;
 
   const supabase = await createSupabaseServer();
   const { data, error } = await supabase
@@ -76,7 +91,7 @@ export async function getProductoByIdAdmin(id: string): Promise<Producto | null>
 
 /** Todos los productos (incluye ocultos) — solo para el panel admin. */
 export async function getProductosAdmin(): Promise<Producto[]> {
-  if (!supabaseConfigurado) return PRODUCTOS_SEED;
+  if (usarDatosDeEjemplo) return PRODUCTOS_SEED;
 
   const supabase = await createSupabaseServer();
   const { data, error } = await supabase
@@ -85,7 +100,7 @@ export async function getProductosAdmin(): Promise<Producto[]> {
     .order("orden");
   if (error) {
     console.error("[getProductosAdmin]", error.message);
-    return PRODUCTOS_SEED;
+    return [];
   }
   return data as Producto[];
 }

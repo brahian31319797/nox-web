@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BoltIcon, InstagramIcon } from "@/components/site/icons";
+import { InstagramIcon } from "@/components/site/icons";
+import { LogoMark } from "@/components/brand/Logo";
 import { buildGeneralWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
 
 const CATEGORIAS = [
@@ -14,14 +15,15 @@ export function Footer() {
       <div className="mx-auto flex max-w-[1180px] flex-wrap items-start justify-between gap-6">
         <div className="max-w-[34ch]">
           <Link href="/" className="flex items-center gap-2.5 font-display text-[17px] font-extrabold">
-            <span className="grid h-[30px] w-[30px] place-items-center rounded-[9px] bg-[var(--accent)] text-[var(--accent-ink)]">
-              <BoltIcon className="h-4 w-4" />
-            </span>
+            <LogoMark className="h-[30px] w-[30px] flex-none" />
             Brahian González
           </Link>
-          <p className="mt-3 text-[13.5px] text-[var(--ink-soft)]">
-            Monopatines, motos y bicicletas eléctricas con envío a todo el país. Comprá con respaldo y atención
-            directa.
+          <p className="mt-3 text-[13.5px] leading-relaxed text-[var(--ink-soft)]">
+            Monopatines, motos y bicis eléctricas con envío a todo el país. Te asesora Brahian
+            directamente, antes y después de la compra.
+          </p>
+          <p className="mt-3 font-mono text-[11.5px] uppercase tracking-[0.1em] text-[var(--ink-faint)]">
+            Misiones, Argentina
           </p>
         </div>
 

@@ -141,14 +141,14 @@ export function VehicleIcon({ categoria, className }: { categoria: "monopatin" |
     ),
     moto: (
       <>
-        <circle cx="42" cy="112" r="26" />
-        <circle cx="160" cy="112" r="26" />
-        <path d="M42 112 L92 78 L128 78" />
-        <path d="M92 78 L108 112 L160 112" />
-        <path d="M128 78 L118 62 L96 62" />
-        <path d="M128 78 Q150 72 160 88" />
-        <path d="M60 88 Q80 74 100 82" />
-        <path d="M118 62 L138 58" />
+        <circle cx="46" cy="114" r="22" />
+        <circle cx="156" cy="114" r="22" />
+        <path d="M46 114 L46 92 Q47 78 66 78 L98 78" />
+        <path d="M98 78 L110 106 L138 106" />
+        <path d="M138 106 L150 64" />
+        <path d="M150 64 L156 114" />
+        <path d="M150 58 L132 54 M150 58 L170 54" />
+        <path d="M150 64 L150 58" />
       </>
     ),
     bici: (
