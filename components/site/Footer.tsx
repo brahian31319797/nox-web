@@ -89,12 +89,12 @@ export function Footer() {
         <span>
           Design by{" "}
           <a
-            href="https://housetech.ar"
+            href="https://instagram.com/housetech.ar"
             target="_blank"
             rel="noopener noreferrer"
             className="font-bold text-[var(--ink-soft)] transition-colors hover:text-[var(--accent-2)]"
           >
-            housetech.ar
+            @housetech.ar
           </a>
         </span>
       </div>
