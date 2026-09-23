@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
 import { cargarArchivo } from "@/lib/og-fuente";
+import { OgLogoMark } from "@/lib/og-logo";
 import { getProductoBySlug } from "@/lib/productos";
 import { fmtArs } from "@/lib/format";
 import { SITE_NAME } from "@/lib/site";
@@ -96,23 +97,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div
-              style={{
-                display: "flex",
-                width: 52,
-                height: 52,
-                borderRadius: 13,
-                background: "#151517",
-                border: "2px solid #2f2f34",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#f5f4f1",
-                fontSize: 21,
-                fontWeight: 900,
-              }}
-            >
-              BG
-            </div>
+            <OgLogoMark size={52} />
             <span style={{ color: "#a8a6a1", fontSize: 24 }}>{SITE_NAME}</span>
           </div>
         </div>
@@ -124,13 +109,13 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: foto ? "#151517" : "#ff5a1f",
+            background: foto ? "#151517" : "#0e0e10",
           }}
         >
           {foto ? (
             <img src={foto} alt="" width={ANCHO_FOTO} height={size.height} style={{ objectFit: "cover" }} />
           ) : (
-            <span style={{ color: "#0a0a0b", fontSize: 150, fontWeight: 900 }}>BG</span>
+            <OgLogoMark size={230} />
           )}
         </div>
       </div>
