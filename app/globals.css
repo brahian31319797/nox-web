@@ -39,17 +39,28 @@
     --accent-soft: #2a1710;
     --accent-ink: #0a0a0b;
     /* Verde = plata a favor del cliente (ahorro, seña, beneficio).
-       Se usa SOLO para eso: si aparece en cualquier lado pierde el significado
-       que le estamos enseñando a la persona. Ver docs/manual-de-marca.md §7.2 */
-    --money: #3ed598;
-    --money-2: #7ce8bd;
-    --money-soft: #0f2a20;
-    --money-line: #1d4a39;
+       Ver docs/manual-de-marca.md §7.2
+       Dos reglas de convivencia con el naranja, que es el otro color fuerte:
+       1. Nunca los dos como superficie sólida uno al lado del otro. Tienen la
+          misma luminosidad y vibran; el verde va en texto, bordes finos y
+          fondos apagados.
+       2. El verde es menos saturado que el naranja a propósito, para que
+          quede claro cuál manda cuando aparecen en la misma pantalla. */
+    --money: #7ddcb0;
+    --money-2: #a8ecd0;
+    --money-soft: #10261f;
+    --money-line: #1e4436;
 
-    --ok: #3ed598;
-    --ok-soft: #0f2a20;
-    --danger: #ff5d6c;
-    --danger-soft: #2e1418;
+    /* "Publicado" y "plata a favor" son el mismo verde con dos nombres: son
+       dos ideas distintas, pero sumar un tercer verde solo agrega ruido. */
+    --ok: var(--money);
+    --ok-soft: var(--money-soft);
+
+    /* El rojo anterior (#ff5d6c) estaba a 20° del naranja de marca: un error y
+       un botón se leían igual. Este es más rosado y más claro, así se separa
+       por tono y por luminosidad. */
+    --danger: #ff7a90;
+    --danger-soft: #30161c;
     --radius: 16px;
     --radius-sm: 11px;
     --radius-lg: 26px;

@@ -3,69 +3,77 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@/components/site/icons";
 
 /**
- * El hero anterior ("La ciudad es tuya, movete eléctrico") le hablaba al ego.
- * Nuestro público compra cuando le cierra el número, no cuando se siente cool:
- * son trabajadores que quieren dejar de gastar en transporte. Por eso el
- * titular va al bolsillo y el segundo botón lleva directo a la calculadora.
- * Ver docs/manual-de-marca.md §1.
+ * Dos composiciones distintas, no la misma achicada:
+ *
+ * - Escritorio: la foto va de fondo con el texto encima, que es donde una
+ *   imagen apaisada rinde.
+ * - Celular: la foto baja a su propio bloque con la proporción original. De
+ *   fondo había que recortarla tanto que quedaba pared y piso, sin monopatín,
+ *   y encima el texto peleaba con la imagen por el contraste.
+ *
+ * El segundo botón es de contorno, no verde sólido: dos superficies saturadas
+ * una al lado de la otra se anulan, y el verde queda reservado para el dato de
+ * plata (ver docs/manual-de-marca.md §7.2).
  */
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-[var(--line)]">
-      <div className="absolute inset-0">
+    <section className="relative border-b border-[var(--line)]">
+      {/* Fondo: solo desde md, donde la foto apaisada entra sin destrozarse */}
+      <div className="absolute inset-0 hidden md:block">
         <Image
           src="/images/hero.jpg"
-          alt="Persona circulando en un monopatín eléctrico por la ciudad"
+          alt=""
           fill
           priority
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: "0% 77%" }}
+          style={{ objectPosition: "42% 72%" }}
         />
+        <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(10,10,11,.94)_0%,rgba(10,10,11,.86)_42%,rgba(10,10,11,.45)_100%)]" />
       </div>
-      {/* Velo plano y parejo (sin degradado) para que el texto se lea siempre */}
-      <div className="absolute inset-0 bg-black/60" />
 
-      <div className="relative mx-auto flex min-h-[clamp(480px,70vh,640px)] max-w-[1180px] items-center px-5 py-16">
-        <div className="max-w-[640px]">
-          <h1 className="text-[clamp(42px,7vw,76px)] text-[var(--ink)]">
+      <div className="relative mx-auto max-w-[1180px] px-5 pb-10 pt-12 md:flex md:min-h-[clamp(480px,68vh,620px)] md:items-center md:py-16">
+        <div className="md:max-w-[620px]">
+          <h1 className="text-[clamp(40px,10vw,76px)] text-[var(--ink)]">
             Dejá de pagar
             <br />
             por <em className="not-italic text-[var(--accent)]">moverte</em>.
           </h1>
 
-          <p className="my-6 max-w-[46ch] text-[clamp(15.5px,1.7vw,19px)] leading-relaxed text-[var(--ink-soft)]">
+          <p className="my-5 max-w-[42ch] text-[clamp(15.5px,4vw,19px)] leading-relaxed text-[var(--ink-soft)] md:my-6">
             Lo que se te va todos los meses en nafta o colectivo puede terminar siendo tuyo.
             Monopatines, motos y bicis eléctricas, con envío a todo el país.
           </p>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
             <Link
               href="/productos"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-[24px] py-[14px] text-[15px] font-bold text-[var(--accent-ink)] transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-6 py-[15px] text-[15px] font-bold text-[var(--accent-ink)] transition-transform hover:-translate-y-0.5"
             >
               Ver modelos
               <ArrowRightIcon className="h-[18px] w-[18px]" />
             </Link>
             <a
               href="#calculadora"
-              className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-[var(--money-line)] bg-[var(--money-soft)] px-[24px] py-[14px] text-[15px] font-bold text-[var(--money)] transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[var(--line-strong)] px-6 py-[15px] text-[15px] font-bold text-[var(--ink)] transition-colors hover:border-[var(--ink-soft)]"
             >
               Calculá cuánto ahorrás
             </a>
           </div>
-
-          {/* Los tres diferenciales reales, sin adornos. Manual de marca §4.
-              En mobile van apilados: los separadores quedaban colgando al final
-              de cada renglón, así que solo aparecen cuando entran en una línea. */}
-          <ul className="mt-8 flex flex-col gap-y-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--ink-soft)] sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2">
-            <li>Pagás 50% y el resto al recibir</li>
-            <li aria-hidden className="hidden text-[var(--ink-faint)] sm:block">·</li>
-            <li>Envío a todo el país</li>
-            <li aria-hidden className="hidden text-[var(--ink-faint)] sm:block">·</li>
-            <li>Te asesoro yo, no un bot</li>
-          </ul>
         </div>
+      </div>
+
+      {/* En celular la foto es un bloque propio: se ve el producto completo */}
+      <div className="relative aspect-[16/9] w-full md:hidden">
+        <Image
+          src="/images/hero.jpg"
+          alt="Monopatín eléctrico estacionado en la vereda"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "50% 70%" }}
+        />
       </div>
     </section>
   );

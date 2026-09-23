@@ -4,6 +4,8 @@ export interface Categoria {
   id: string;
   slug: CategoriaSlug;
   nombre: string;
+  /** Foto de portada. Si está vacía, la tarjeta cae al dibujo del vehículo. */
+  imagen: string | null;
   orden: number;
 }
 

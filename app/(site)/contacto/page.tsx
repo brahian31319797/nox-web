@@ -1,4 +1,4 @@
-import { Benefits } from "@/components/site/Benefits";
+import { TrustBar } from "@/components/site/TrustBar";
 import { InstagramIcon, WhatsAppIcon } from "@/components/site/icons";
 import { buildGeneralWhatsAppUrl, INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
@@ -19,10 +19,7 @@ export default function ContactoPage() {
       <section className="px-5 py-14">
         <div className="mx-auto max-w-[1180px]">
           <div className="mx-auto mb-8 max-w-[640px] text-center">
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-              Estoy para ayudarte
-            </span>
-            <h1 className="mt-3.5 text-[clamp(30px,5vw,48px)]">Hablemos</h1>
+            <h1 className="text-[clamp(30px,6vw,48px)]">Hablemos</h1>
             <p className="mt-3.5 text-base text-[var(--ink-soft)]">
               La forma más rápida es por WhatsApp: te respondo las consultas y coordinamos juntos el envío.
               También podés seguirme en Instagram para ver novedades.
@@ -71,7 +68,7 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      <Benefits />
+      <TrustBar />
     </main>
   );
 }

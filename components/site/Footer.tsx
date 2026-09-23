@@ -86,6 +86,17 @@ export function Footer() {
 
       <div className="mx-auto mt-9 flex max-w-[1180px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-5 font-mono text-[12.5px] text-[var(--ink-faint)]">
         <span>© {new Date().getFullYear()} Brahian González</span>
+        <span>
+          Design by{" "}
+          <a
+            href="https://housetech.ar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-[var(--ink-soft)] transition-colors hover:text-[var(--accent-2)]"
+          >
+            housetech.ar
+          </a>
+        </span>
       </div>
     </footer>
   );

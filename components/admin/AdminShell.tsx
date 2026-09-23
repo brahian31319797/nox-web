@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import { LogoMark } from "@/components/brand/Logo";
-import { ExternalLinkIcon, GridIcon, HomeIcon, LogOutIcon } from "@/components/admin/icons";
+import { ExternalLinkIcon, GridIcon, HomeIcon, ListIcon, LogOutIcon } from "@/components/admin/icons";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
 const NAV = [
   { href: "/admin", label: "Panel", icon: HomeIcon, exacto: true },
   { href: "/admin/productos", label: "Productos", icon: GridIcon, exacto: false },
+  { href: "/admin/categorias", label: "Categorías", icon: ListIcon, exacto: false },
 ];
 
 export function AdminShell({

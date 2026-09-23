@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Hero } from "@/components/site/Hero";
-import { Benefits } from "@/components/site/Benefits";
+import { TrustBar } from "@/components/site/TrustBar";
+import { SectionHeader } from "@/components/site/SectionHeader";
 import { CategoryCard } from "@/components/site/CategoryCard";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SavingsCalculator } from "@/components/site/SavingsCalculator";
-import { ArrowRightIcon, WhatsAppIcon } from "@/components/site/icons";
+import { WhatsAppIcon } from "@/components/site/icons";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { elegirDestacados, getCategorias, getProductosPublicados } from "@/lib/productos";
 
@@ -16,24 +16,23 @@ export default async function HomePage() {
   return (
     <main>
       <Hero />
+      <TrustBar />
 
       {categorias.length > 0 && (
-        <section className="border-y border-[var(--line)] bg-[var(--surface)] px-5 py-14">
+        <section className="px-5 py-14 md:py-16">
           <div className="mx-auto max-w-[1180px]">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
-              <div>
-                <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-                  Según cómo te movés
-                </span>
-                <h2 className="text-[clamp(26px,3.6vw,40px)]">Categorías</h2>
-              </div>
-              <Link href="/productos" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent-2)]">
-                Ver todo <ArrowRightIcon className="h-[15px] w-[15px]" />
-              </Link>
-            </div>
+            <SectionHeader
+              numero="01"
+              titulo="Elegí cómo te movés"
+              accion={{ href: "/productos", label: "Ver todo" }}
+            />
             <div className="grid gap-4 md:grid-cols-3">
               {categorias.map((c) => (
-                <CategoryCard key={c.slug} categoria={c} count={productos.filter((p) => p.categoria.slug === c.slug).length} />
+                <CategoryCard
+                  key={c.slug}
+                  categoria={c}
+                  count={productos.filter((p) => p.categoria.slug === c.slug).length}
+                />
               ))}
             </div>
           </div>
@@ -41,19 +40,13 @@ export default async function HomePage() {
       )}
 
       {hayCatalogo ? (
-        <section className="px-5 py-14">
+        <section className="border-t border-[var(--line)] bg-[var(--surface)] px-5 py-14 md:py-16">
           <div className="mx-auto max-w-[1180px]">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-5">
-              <div>
-                <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-                  Los más elegidos
-                </span>
-                <h2 className="text-[clamp(26px,3.6vw,40px)]">Destacados</h2>
-              </div>
-              <Link href="/productos" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent-2)]">
-                Ver catálogo <ArrowRightIcon className="h-[15px] w-[15px]" />
-              </Link>
-            </div>
+            <SectionHeader
+              numero="02"
+              titulo="Los más elegidos"
+              accion={{ href: "/productos", label: "Ver catálogo" }}
+            />
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-[18px]">
               {destacados.map((p) => (
                 <ProductCard key={p.id} producto={p} />
@@ -63,13 +56,12 @@ export default async function HomePage() {
         </section>
       ) : (
         /* Si la base no responde preferimos decirlo antes que inventar catálogo.
-           Ver lib/productos.ts y docs/manual-de-marca.md §8 */
+           Ver lib/productos.ts */
         <section className="px-5 py-14">
           <div className="mx-auto max-w-[640px] rounded-[18px] border border-[var(--line)] bg-[var(--surface)] p-8 text-center">
-            <h2 className="text-[22px]">No pudimos cargar el catálogo</h2>
+            <h2 className="text-[22px]">Estamos actualizando el catálogo</h2>
             <p className="mx-auto mt-3 max-w-[44ch] text-[14.5px] leading-relaxed text-[var(--ink-soft)]">
-              Es un problema mío, no tuyo. Escribime por WhatsApp y te paso los modelos que tengo
-              disponibles.
+              Escribime por WhatsApp y te paso los modelos que tengo disponibles ahora mismo.
             </p>
             <a
               href={buildGeneralWhatsAppUrl()}
@@ -78,7 +70,7 @@ export default async function HomePage() {
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-[22px] py-[13px] text-[15px] font-bold text-[var(--accent-ink)]"
             >
               <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Escribir por WhatsApp
+              Escribirme por WhatsApp
             </a>
           </div>
         </section>
@@ -86,20 +78,24 @@ export default async function HomePage() {
 
       {hayCatalogo && <SavingsCalculator productos={productos} />}
 
-      <Benefits />
-
-      <section className="px-5 py-14">
-        <div className="relative mx-auto max-w-[1180px] overflow-hidden rounded-[26px] bg-[var(--accent)] px-6 py-12 text-center text-[var(--accent-ink)] md:px-11">
-          <h2 className="text-[clamp(26px,4vw,40px)]">¿No sabés cuál te sirve?</h2>
-          <p className="mx-auto my-3.5 max-w-[46ch] text-[rgba(10,10,11,0.75)]">
-            Contame cuánto andás por día y te digo cuál te conviene. Si ninguno te cierra, también
-            te lo voy a decir.
-          </p>
+      {/* Cierre: en lugar del bloque de color centrado de siempre, una franja
+          partida con la firma del logo a un lado. */}
+      <section className="border-t border-[var(--line)] px-5 py-14 md:py-16">
+        <div className="mx-auto flex max-w-[1180px] flex-col gap-7 md:flex-row md:items-center md:justify-between md:gap-12">
+          <div className="flex gap-4">
+            <span aria-hidden className="block w-[3px] flex-none bg-[var(--accent)]" />
+            <div>
+              <h2 className="text-[clamp(26px,5.5vw,38px)]">¿No sabés cuál te sirve?</h2>
+              <p className="mt-3 max-w-[44ch] text-[15px] leading-relaxed text-[var(--ink-soft)]">
+                Contame cuántos kilómetros hacés por día y te digo cuál te conviene de verdad.
+              </p>
+            </div>
+          </div>
           <a
             href={buildGeneralWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-[22px] py-[13px] text-[15px] font-bold text-[var(--canvas)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex flex-none items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-[15px] text-[15px] font-bold text-[var(--accent-ink)] transition-transform hover:-translate-y-0.5"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
             Escribirme por WhatsApp

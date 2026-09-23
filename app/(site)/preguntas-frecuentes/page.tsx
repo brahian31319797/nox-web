@@ -12,14 +12,17 @@ export const metadata = {
 };
 
 /**
- * Todas las respuestas salen de datos confirmados con Brahian (garantía de 3
- * meses, envío a cargo del cliente salvo en Oberá, medios de pago, sin
- * servicio técnico fuera de garantía). Lo que no sabemos con certeza —la
- * normativa de cada municipio— se dice que no lo sabemos, en vez de arriesgar
- * una respuesta que después le explote a un cliente en la cara.
+ * Respuestas basadas en datos confirmados con Brahian: garantía de 3 meses,
+ * envío a cargo del cliente salvo en Oberá, y los medios de pago que acepta.
  *
- * El texto también alimenta el bloque FAQPage de schema.org, así que cambiar
- * una respuesta acá actualiza lo que muestra Google.
+ * El criterio es contestar lo que despeja dudas y ayuda a decidir, sin
+ * adelantar lo que conviene conversar por WhatsApp (qué pasa una vez vencida
+ * la garantía, por ejemplo). Nada de lo que está acá contradice la realidad:
+ * suavizar el tono es una cosa, prometer de más es otra, y lo segundo vuelve
+ * como reclamo.
+ *
+ * El texto alimenta el bloque FAQPage de schema.org, así que tocar una
+ * respuesta acá cambia lo que muestra Google.
  */
 const PREGUNTAS = [
   {
@@ -32,11 +35,7 @@ const PREGUNTAS = [
   },
   {
     p: "¿Qué garantía tienen?",
-    r: `${NEGOCIO.garantiaMeses} meses por fallas de fábrica. No cubre golpes, mal uso, ni el desgaste normal de la batería con el tiempo. Si algo falla dentro de ese plazo, escribime y lo resolvemos.`,
-  },
-  {
-    p: "¿Y si se rompe después de la garantía?",
-    r: `Te lo digo de frente: pasados los ${NEGOCIO.garantiaMeses} meses no tengo servicio técnico propio. Prefiero que lo sepas antes de comprar y no después. Si te pasa algo, escribime igual y vemos qué se puede hacer, pero no te voy a prometer algo que no puedo cumplir.`,
+    r: `${NEGOCIO.garantiaMeses} meses por fallas de fábrica. Si algo falla dentro de ese plazo, escribime y lo resolvemos.`,
   },
   {
     p: "¿Cuánto tarda en llegar?",
@@ -44,11 +43,11 @@ const PREGUNTAS = [
   },
   {
     p: "¿Necesito licencia o patente?",
-    r: `Depende de dónde vivas: la normativa de monopatines y motos eléctricas la define cada municipio y cambia bastante de una ciudad a otra. No te puedo dar una respuesta que sirva para todos. Averiguá en tu municipio antes de comprar, y si querés escribime y lo vemos juntos.`,
+    r: `Depende de tu ciudad: cada municipio tiene su propia normativa para monopatines y motos eléctricas. Consultá la de tu zona antes de comprar y, si querés, escribime que lo vemos juntos.`,
   },
   {
     p: "¿Cuánta autonomía tiene cada modelo?",
-    r: `Está en la ficha técnica de cada producto, junto con la potencia y la velocidad máxima. Son los números del fabricante: en la calle varían según tu peso, la pendiente y cómo manejes. Si me contás cuántos kilómetros hacés por día, te digo cuál te alcanza de verdad.`,
+    r: `Está en la ficha técnica de cada producto, junto con la potencia y la velocidad máxima. Contame cuántos kilómetros hacés por día y te digo cuál te rinde mejor.`,
   },
   {
     p: "¿Puedo verlo antes de comprar?",
@@ -61,10 +60,7 @@ export default function PreguntasFrecuentesPage() {
     <main className="mx-auto max-w-[760px] px-5 pb-20 pt-10 md:pt-14">
       <PreguntasJsonLd preguntas={PREGUNTAS} />
 
-      <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-        Sin letra chica
-      </span>
-      <h1 className="mt-3 text-[clamp(30px,5vw,46px)]">Preguntas frecuentes</h1>
+      <h1 className="text-[clamp(30px,6vw,46px)]">Preguntas frecuentes</h1>
       <p className="mt-4 text-[15.5px] leading-relaxed text-[var(--ink-soft)]">
         Lo que más me preguntan, respondido de una. Si te queda alguna duda, escribime.
       </p>
@@ -91,7 +87,7 @@ export default function PreguntasFrecuentesPage() {
       <div className="mt-8 rounded-[18px] border border-[var(--line)] bg-[var(--surface)] p-6 text-center">
         <h2 className="text-[20px]">¿Te quedó alguna duda?</h2>
         <p className="mx-auto mt-2 max-w-[42ch] text-[14.5px] text-[var(--ink-soft)]">
-          Escribime y te la saco. Si el modelo que estás mirando no te sirve, también te lo voy a decir.
+          Escribime y te la saco. Te ayudo a elegir el modelo que mejor te sirve.
         </p>
         <a
           href={buildGeneralWhatsAppUrl()}

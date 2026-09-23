@@ -16,10 +16,7 @@ export default async function ProductosPage({
   return (
     <main>
       <div className="mx-auto max-w-[1180px] px-5 pt-11">
-        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-          Catálogo completo
-        </span>
-        <h1 className="mt-3 text-[clamp(30px,4.5vw,46px)]">Productos</h1>
+        <h1 className="text-[clamp(30px,6vw,46px)]">Catálogo</h1>
       </div>
       <ProductsExplorer productos={productos} categorias={categorias} categoriaInicial={categoria} />
     </main>

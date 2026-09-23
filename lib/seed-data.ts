@@ -7,9 +7,9 @@ import type { Categoria, Producto } from "./types";
  * runtime — queda como base para supabase/seed.sql.
  */
 export const CATEGORIAS_SEED: Categoria[] = [
-  { id: "cat-monopatin", slug: "monopatin", nombre: "Monopatines", orden: 1 },
-  { id: "cat-moto", slug: "moto", nombre: "Motos Eléctricas", orden: 2 },
-  { id: "cat-bici", slug: "bici", nombre: "Bicicletas Eléctricas", orden: 3 },
+  { id: "cat-monopatin", slug: "monopatin", nombre: "Monopatines", imagen: null, orden: 1 },
+  { id: "cat-moto", slug: "moto", nombre: "Motos Eléctricas", imagen: null, orden: 2 },
+  { id: "cat-bici", slug: "bici", nombre: "Bicicletas Eléctricas", imagen: null, orden: 3 },
 ];
 
 const cat = (slug: Categoria["slug"]) =>

@@ -83,6 +83,9 @@ pie. Ahí "Brahian González" es la firma, no la voz.
 - Hablamos de plata sin vergüenza. El cliente está sacando cuentas, acompañémoslo.
 - Frases cortas. Se lee en el celular, parado, esperando el colectivo.
 - Orientamos, nunca presionamos.
+- Franqueza no es contar de más. Decimos la verdad sobre lo que ofrecemos, sin
+  adelantar lo que conviene conversar por WhatsApp. No prometer de más y no
+  espantar son dos cosas distintas, y las dos importan.
 
 **Cómo NO hablamos**
 
@@ -126,13 +129,26 @@ Cada color tiene un trabajo asignado. Esto no es decoración, es información.
 |---|---|---|
 | **Base** | `#0A0A0B` | Fondo de todo el sitio |
 | **Acción** | `#FF5A1F` | Botones, CTAs, lo que empuja a hacer algo |
-| **Ahorro** | `#3ED598` | Todo lo que habla de plata: ahorro calculado, seña del 50%, beneficios |
+| **Ahorro** | `#7DDCB0` | Todo lo que habla de plata: ahorro calculado, seña del 50% |
 | **Texto** | `#F5F4F1` | Texto principal |
+| **Error** | `#FF7A90` | Solo en el panel: avisos y acciones destructivas |
 
-**La regla clave**: el verde aparece **solo** cuando se habla de dinero a favor
-del cliente. Después de tres pantallas, la persona aprende sin darse cuenta que
-verde = esto me conviene. Si el verde se usa para cualquier cosa, se pierde
-el efecto.
+**Tres reglas de convivencia**, aprendidas a los golpes:
+
+1. **El verde aparece solo cuando se habla de dinero a favor del cliente.**
+   Después de tres pantallas, la persona asocia verde con "esto me conviene".
+   Si el verde se usa para cualquier cosa, el efecto se pierde.
+
+2. **Naranja y verde nunca como superficies sólidas una al lado de la otra.**
+   Tienen luminosidad parecida y vibran: ninguno domina y la pantalla se
+   ensucia. Cuando hay dos botones juntos, el primario va naranja sólido y el
+   segundo de contorno. El verde vive en texto, bordes finos y fondos apagados.
+
+3. **El verde es menos saturado que el naranja a propósito.** Así queda claro
+   cuál manda cuando aparecen en la misma pantalla.
+
+El rojo de error se alejó del naranja: el anterior (`#FF5D6C`) estaba a 20° de
+tono del color de marca y un aviso se leía igual que un botón.
 
 El naranja se mantiene porque ya era la elección correcta: es color de chaleco
 reflectivo y de señal de precaución. Es el color de moverse por la calle.
@@ -148,6 +164,23 @@ reflectivo y de señal de precaución. Es el color de moverse por la calle.
 **Jerarquía**: los títulos van en peso 900 con espaciado cerrado (`-0.03em`).
 La diferencia de tamaño entre título y texto tiene que ser amplia — si todo
 mide parecido, nada resalta.
+
+### 7.4 Lo que no hacemos (o deja de parecer nuestro)
+
+Estos recursos son los que hacen que una página se vea armada con plantilla.
+Están prohibidos:
+
+- **La misma línea en mayúscula y monoespaciada arriba de cada título.**
+  Repetida en siete secciones era puro relleno. En su lugar, las secciones se
+  numeran (`01`, `02`…) con una barra del color de marca al costado: es el
+  índice de un manual técnico, que es de donde sale la identidad.
+- **Grillas de tres tarjetas con ícono redondo, título y párrafo.** Los
+  diferenciales van en una banda dividida por líneas, con el dato grande
+  adelante, como un tablero de señalética.
+- **El bloque de color sólido centrado con un botón al medio** como cierre de
+  página. El cierre va alineado a la izquierda, con la barra de marca.
+- **Fotos apaisadas recortadas a vertical** para usarlas de fondo en celular.
+  Si la foto no entra, baja a su propio bloque con la proporción original.
 
 ---
 

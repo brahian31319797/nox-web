@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { fmtArs, digitsFromInput } from "@/lib/format";
 import { buildAhorroWhatsAppUrl } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/site/icons";
+import { SectionHeader } from "@/components/site/SectionHeader";
 import type { Producto } from "@/lib/types";
 
 /** Semanas promedio por mes (52 / 12). Evita el error de multiplicar por 4. */
@@ -43,16 +44,11 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
   return (
     <section id="calculadora" className="scroll-mt-20 border-y border-[var(--line)] bg-[var(--surface)] px-5 py-16">
       <div className="mx-auto max-w-[1180px]">
-        <div className="mb-9 max-w-[52ch]">
-          <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--money)]">
-            Hacé la cuenta
-          </span>
-          <h2 className="text-[clamp(28px,4vw,44px)]">¿Cuánto se te va en moverte?</h2>
-          <p className="mt-4 text-[15.5px] leading-relaxed text-[var(--ink-soft)]">
-            Poné lo que gastás por semana en nafta, colectivo o remis y te digo en cuánto tiempo
-            el vehículo se termina de pagar solo.
-          </p>
-        </div>
+        <SectionHeader
+          numero="03"
+          titulo="¿Cuánto se te va en moverte?"
+          bajada="Poné lo que gastás por semana en nafta, colectivo o remis y te digo en cuánto tiempo el vehículo se termina de pagar solo."
+        />
 
         <div className="grid gap-4 lg:grid-cols-[1fr_1.1fr] lg:gap-5">
           {/* ─── Entradas ─────────────────────────────────────────── */}
@@ -118,11 +114,11 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
             ) : demasiadoLargo ? (
               <div className="m-auto text-center">
                 <p className="text-[15.5px] leading-relaxed text-[var(--ink)]">
-                  Con ese gasto, este modelo tardaría más de 5 años en pagarse solo.
+                  Para ese gasto te conviene un modelo más accesible.
                 </p>
                 <p className="mt-3 text-[14px] text-[var(--ink-soft)]">
-                  Probá con un modelo más accesible, o escribime y te ayudo a encontrar el que sí
-                  te cierra.
+                  Probá con otro de la lista, o escribime y te ayudo a encontrar el que mejor te
+                  cierra.
                 </p>
               </div>
             ) : (
@@ -170,9 +166,8 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
           </div>
         </div>
 
-        {/* Franqueza: si omitimos la carga, el número que mostramos miente un poco. */}
         <p className="mt-5 text-[12.5px] text-[var(--ink-faint)]">
-          La cuenta no incluye lo que sale cargar la batería.
+          La cuenta toma solo lo que hoy gastás en transporte.
         </p>
       </div>
     </section>
