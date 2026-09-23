@@ -171,3 +171,12 @@ export function VehicleIcon({ categoria, className }: { categoria: "monopatin" |
     </svg>
   );
 }
+
+export function ZoomIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="11" cy="11" r="7" />
+      <path d="M16.5 16.5 21 21M11 8v6M8 11h6" />
+    </svg>
+  );
+}

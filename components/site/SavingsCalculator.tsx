@@ -42,7 +42,7 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
   if (!elegido) return null;
 
   return (
-    <section id="calculadora" className="scroll-mt-20 border-y border-[var(--line)] bg-[var(--surface)] px-5 py-16">
+    <section id="calculadora" className="scroll-mt-20 bg-[var(--canvas)] px-5 py-14 md:py-16">
       <div className="mx-auto max-w-[1180px]">
         <SectionHeader
           numero="03"
@@ -52,11 +52,11 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
 
         <div className="grid gap-4 lg:grid-cols-[1fr_1.1fr] lg:gap-5">
           {/* ─── Entradas ─────────────────────────────────────────── */}
-          <div className="rounded-[18px] border border-[var(--line)] bg-[var(--canvas)] p-6 md:p-7">
+          <div className="rounded-[18px] border border-[var(--line)] bg-[var(--surface)] p-6 md:p-7">
             <label htmlFor="gasto" className="block text-[13px] font-bold text-[var(--ink)]">
               ¿Cuánto gastás por semana en moverte?
             </label>
-            <div className="mt-3 flex h-[62px] items-center gap-2 rounded-[13px] border-[1.5px] border-[var(--line-strong)] bg-[var(--surface)] px-4 focus-within:border-[var(--money)]">
+            <div className="mt-3 flex h-[62px] items-center gap-2 rounded-[13px] border-[1.5px] border-[var(--line-strong)] bg-[var(--canvas)] px-4 focus-within:border-[var(--money)]">
               <span className="font-display text-[22px] font-extrabold text-[var(--ink-faint)]">$</span>
               <input
                 id="gasto"
@@ -95,7 +95,7 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
               id="modelo"
               value={elegido.id}
               onChange={(e) => setProductoId(e.target.value)}
-              className="mt-3 h-[52px] w-full rounded-[13px] border-[1.5px] border-[var(--line-strong)] bg-[var(--surface)] px-4 text-[14.5px] font-semibold text-[var(--ink)] outline-none focus:border-[var(--money)]"
+              className="mt-3 h-[52px] w-full rounded-[13px] border-[1.5px] border-[var(--line-strong)] bg-[var(--canvas)] px-4 text-[14.5px] font-semibold text-[var(--ink)] outline-none focus:border-[var(--money)]"
             >
               {ordenados.map((p) => (
                 <option key={p.id} value={p.id}>

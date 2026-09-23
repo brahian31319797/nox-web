@@ -8,6 +8,20 @@ import { WhatsAppIcon } from "@/components/site/icons";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { elegirDestacados, getCategorias, getProductosPublicados } from "@/lib/productos";
 
+/**
+ * ORDEN DE FONDOS — alterna negro y gris, sin repetir nunca dos seguidos.
+ * El footer es negro y cierra la secuencia, así que la última sección de acá
+ * tiene que ser gris. Si agregás o movés una sección, recorré la lista entera
+ * y reasigná: basta con insertar una en el medio para romper toda la cadena.
+ *
+ *   Hero         negro   (canvas)
+ *   Datos        gris    (surface)
+ *   Categorías   negro
+ *   Destacados   gris
+ *   Calculadora  negro   (la sección la pinta SavingsCalculator)
+ *   Cierre       gris
+ *   Footer       negro
+ */
 export default async function HomePage() {
   const [categorias, productos] = await Promise.all([getCategorias(), getProductosPublicados()]);
   const destacados = elegirDestacados(productos);
@@ -40,7 +54,7 @@ export default async function HomePage() {
       )}
 
       {hayCatalogo ? (
-        <section className="border-t border-[var(--line)] bg-[var(--surface)] px-5 py-14 md:py-16">
+        <section className="bg-[var(--surface)] px-5 py-14 md:py-16">
           <div className="mx-auto max-w-[1180px]">
             <SectionHeader
               numero="02"
@@ -80,7 +94,7 @@ export default async function HomePage() {
 
       {/* Cierre: en lugar del bloque de color centrado de siempre, una franja
           partida con la firma del logo a un lado. */}
-      <section className="border-t border-[var(--line)] px-5 py-14 md:py-16">
+      <section className="bg-[var(--surface)] px-5 py-14 md:py-16">
         <div className="mx-auto flex max-w-[1180px] flex-col gap-7 md:flex-row md:items-center md:justify-between md:gap-12">
           <div className="flex gap-4">
             <span aria-hidden className="block w-[3px] flex-none bg-[var(--accent)]" />

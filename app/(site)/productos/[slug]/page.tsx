@@ -45,13 +45,28 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
         Volver al catálogo
       </Link>
 
-      <div className="grid gap-9 md:grid-cols-2">
-        <ProductGallery
-          imagenes={producto.imagenes}
-          nombre={producto.nombre}
-          categoria={producto.categoria}
-          etiqueta={producto.etiqueta}
-        />
+      <div className="grid gap-9 md:grid-cols-2 md:items-start">
+        <div>
+          <ProductGallery
+            imagenes={producto.imagenes}
+            nombre={producto.nombre}
+            categoria={producto.categoria}
+            etiqueta={producto.etiqueta}
+          />
+
+          {/* En escritorio la descripción vive acá, debajo de las fotos: deja
+              la columna derecha para lo que decide la compra (precio, contacto
+              y ficha técnica). En celular hay una sola columna, así que va
+              pegada al título, que es su lugar natural al leer de corrido. */}
+          {producto.descripcion && (
+            <div className="mt-7 hidden md:block">
+              <h2 className="text-[17px]">Sobre este modelo</h2>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-[var(--ink-soft)]">
+                {producto.descripcion}
+              </p>
+            </div>
+          )}
+        </div>
 
         <div>
           <span className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-[var(--accent-2)]">
@@ -59,7 +74,9 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
           </span>
           <h1 className="mb-2 mt-2.5 text-[clamp(28px,4vw,44px)]">{producto.nombre}</h1>
           {producto.descripcion && (
-            <p className="mb-6 max-w-[46ch] text-[15.5px] text-[var(--ink-soft)]">{producto.descripcion}</p>
+            <p className="mb-6 text-[15.5px] leading-relaxed text-[var(--ink-soft)] md:hidden">
+              {producto.descripcion}
+            </p>
           )}
 
           <div className="mb-[22px] rounded-[16px] border border-[var(--line)] bg-[var(--surface)] p-5">
