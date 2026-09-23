@@ -3,7 +3,8 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AlertIcon, LockIcon, UserIcon } from "@/components/admin/icons";
-import { BoltIcon, ArrowRightIcon } from "@/components/site/icons";
+import { ArrowRightIcon } from "@/components/site/icons";
+import { LogoMark } from "@/components/brand/Logo";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
 const SUPABASE_CONFIGURADO = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
@@ -46,9 +47,7 @@ function LoginForm() {
     <div className="flex min-h-screen items-center justify-center bg-[var(--canvas)] p-5">
       <div className="w-full max-w-[380px] rounded-[26px] border border-[var(--line)] bg-[var(--surface)] p-8 shadow-lg">
         <div className="mb-7 flex items-center gap-2.5">
-          <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-[10px] bg-[var(--accent)] text-[var(--accent-ink)]">
-            <BoltIcon className="h-[18px] w-[18px]" />
-          </span>
+          <LogoMark className="h-[34px] w-[34px] flex-none" />
           <div>
             <b className="block font-display text-base font-extrabold">Brahian González</b>
             <span className="block font-mono text-[9.5px] uppercase tracking-[0.14em] text-[var(--ink-faint)]">
@@ -70,7 +69,7 @@ function LoginForm() {
         ) : (
           <>
             <p className="mb-6 text-[13.5px] text-[var(--ink-soft)]">
-              Ingresá para gestionar tus productos y categorías.
+              Ingresá para gestionar el catálogo de la web.
             </p>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
