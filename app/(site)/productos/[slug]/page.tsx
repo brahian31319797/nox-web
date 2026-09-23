@@ -108,10 +108,11 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
             {producto.specs.map((s, i) => (
               <div
                 key={s.label}
-                /* Rayado sin líneas divisorias: tenerlas a la vez era ruido,
-                   y con dos superficies contiguas la separación ya se entiende. */
+                /* Rayado sin líneas divisorias: tenerlas a la vez era ruido.
+                   Alterna el negro del fondo con un gris, no dos grises casi
+                   iguales: con poca diferencia se leen como filas pegadas. */
                 className={`flex items-center justify-between gap-4 px-[18px] py-3.5 text-sm ${
-                  i % 2 === 0 ? "bg-[var(--surface-2)]" : "bg-[var(--surface)]"
+                  i % 2 === 0 ? "bg-[var(--canvas)]" : "bg-[var(--surface-2)]"
                 }`}
               >
                 <span className="flex items-center gap-2.5 text-[var(--ink-soft)]">
