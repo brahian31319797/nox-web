@@ -79,25 +79,45 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
             </p>
           )}
 
-          <div className="mb-[22px] rounded-[16px] border border-[var(--line)] bg-[var(--surface)] p-5">
-            <div className="font-display text-[clamp(30px,5vw,40px)] font-extrabold leading-none tabular-nums">
-              {fmtArs(producto.precio_ars)}
-            </div>
-            <div className="mt-2 font-mono text-sm text-[var(--ink-soft)]">
-              ≈ {fmtUsd(producto.precio_usd)} · precio de referencia
-            </div>
-            {/* Verde porque es plata a favor del cliente. Manual de marca §7.2 */}
-            <div className="mt-3 flex items-center gap-2 rounded-[10px] border border-[var(--money-line)] bg-[var(--money-soft)] px-3 py-2.5 text-[13px] font-semibold text-[var(--money)]">
-              <CoinsIcon className="h-4 w-4 flex-none" />
-              Hay opciones de financiación · Consultame
+          {/* Las dos monedas con el mismo peso visual: se vende en pesos y en
+              dólares por igual, así que ninguna es "de referencia". En celular
+              se apilan porque con decimales los números no entran al lado. */}
+          <div className="mb-[22px] overflow-hidden rounded-[16px] border border-[var(--line)] bg-[var(--surface)]">
+            <div className="flex flex-col sm:flex-row">
+              <div className="flex-[1.35] p-5 sm:border-r sm:border-[var(--line)]">
+                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--ink-faint)]">
+                  Pesos
+                </div>
+                <div className="mt-2 font-display text-[clamp(26px,4.4vw,34px)] font-black leading-none tracking-[-0.03em] tabular-nums">
+                  {fmtArs(producto.precio_ars)}
+                </div>
+              </div>
+
+              {producto.precio_usd > 0 && (
+                <div className="flex-1 border-t border-[var(--line)] p-5 sm:border-t-0">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--ink-faint)]">
+                    Dólares
+                  </div>
+                  <div className="mt-2 font-display text-[clamp(26px,4.4vw,34px)] font-black leading-none tracking-[-0.03em] tabular-nums text-[var(--ink-soft)]">
+                    {fmtUsd(producto.precio_usd)}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {producto.entrega?.trim() && (
-              <div className="mt-2.5 flex items-center gap-2 text-[13px] text-[var(--ink-soft)]">
-                <TruckIcon className="h-4 w-4 flex-none text-[var(--ink-faint)]" />
-                Entrega: <b className="font-semibold text-[var(--ink)]">{producto.entrega}</b>
-              </div>
-            )}
+            <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-[var(--line)] bg-[var(--canvas)] px-5 py-3.5">
+              {/* Verde porque es plata a favor del cliente. Manual de marca §7.2 */}
+              <span className="flex items-center gap-2 text-[13.5px] font-semibold text-[var(--money)]">
+                <CoinsIcon className="h-4 w-4 flex-none" />
+                Financiación disponible
+              </span>
+              {producto.entrega?.trim() && (
+                <span className="flex items-center gap-2 font-mono text-[12.5px] text-[var(--ink-soft)]">
+                  <TruckIcon className="h-4 w-4 flex-none text-[var(--ink-faint)]" />
+                  Entrega {producto.entrega}
+                </span>
+              )}
+            </div>
           </div>
 
           <div className="mb-6 flex flex-wrap gap-2.5">
