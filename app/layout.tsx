@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -24,12 +25,25 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  // Sin metadataBase, Next no puede armar las URLs absolutas que necesitan
+  // las imágenes de vista previa y las etiquetas canónicas.
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Brahian González — Monopatines, motos y bicis eléctricas",
-    template: "%s — Brahian González",
+    default: `${SITE_NAME} — Monopatines, motos y bicis eléctricas`,
+    template: `%s — ${SITE_NAME}`,
   },
-  description:
-    "Dejá de pagar por moverte. Monopatines, motos y bicicletas eléctricas con envío a todo el país. Pagás 50% y el resto al recibir. Misiones, Argentina.",
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Monopatines, motos y bicis eléctricas`,
+    description: SITE_DESCRIPTION,
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {

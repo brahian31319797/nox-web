@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, BoltSpecIcon, CoinsIcon, InstagramIcon, WhatsAppIcon, TruckIcon } from "@/components/site/icons";
 import { ProductGallery } from "@/components/site/ProductGallery";
+import { ProductoJsonLd } from "@/components/site/DatosEstructurados";
 import { fmtArs, fmtUsd } from "@/lib/format";
 import { getProductoBySlug } from "@/lib/productos";
 import { buildProductWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
@@ -9,7 +10,23 @@ import { buildProductWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const producto = await getProductoBySlug(slug);
-  return { title: producto ? producto.nombre : "Producto no encontrado" };
+  if (!producto) return { title: "Producto no encontrado" };
+
+  const descripcion =
+    producto.descripcion?.trim() ||
+    `${producto.nombre} — ${producto.categoria.nombre}. Envío a todo el país, pagás 50% y el resto al recibir.`;
+
+  return {
+    title: producto.nombre,
+    description: descripcion,
+    alternates: { canonical: `/productos/${producto.slug}` },
+    openGraph: {
+      type: "website",
+      title: producto.nombre,
+      description: descripcion,
+      url: `/productos/${producto.slug}`,
+    },
+  };
 }
 
 export default async function ProductoPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -19,6 +36,7 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="mx-auto max-w-[1180px] px-5 pb-16 pt-8">
+      <ProductoJsonLd producto={producto} />
       <Link
         href="/productos"
         className="-ml-2 mb-4 inline-flex min-h-[44px] items-center gap-1.5 px-2 font-mono text-xs text-[var(--ink-soft)] hover:text-[var(--accent-2)] md:mb-6 md:min-h-0 md:px-0"
