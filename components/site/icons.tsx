@@ -24,10 +24,15 @@ export function XIcon({ className }: IconProps) {
   );
 }
 
+/** Logo oficial de WhatsApp, colores propios (no hereda currentColor a propósito). */
 export function WhatsAppIcon({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m4.7 13.4c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11 11 0 0 0 4.3 3.8c1.6.6 2.2.7 3 .6a2.5 2.5 0 0 0 1.6-1.2 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.4-.3" />
+    <svg viewBox="0 0 24 24" className={className}>
+      <circle cx="12" cy="12" r="12" fill="#25D366" />
+      <path
+        fill="#FFF"
+        d="M12 3.6a8.4 8.4 0 0 0-7.2 12.7L3.6 20.4l4.2-1.1A8.4 8.4 0 1 0 12 3.6m4.9 12c-.2.6-1.2 1.1-1.7 1.2s-1 .1-2.3-.5a8 8 0 0 1-3.4-3 9.2 9.2 0 0 1-1.4-2.5c-.2-.7.1-1.4.5-1.9.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.8c.1.1.1.3 0 .4l-.5.7a.4.4 0 0 0 0 .4 5.9 5.9 0 0 0 2.9 2.5c.2.1.3.1.4-.1l.6-.8c.1-.2.3-.2.5-.1l1.5.7c.2.1.4.2.4.3s0 .7-.3 1.3Z"
+      />
     </svg>
   );
 }
