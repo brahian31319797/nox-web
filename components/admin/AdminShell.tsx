@@ -65,8 +65,12 @@ export function AdminShell({
 
       {/* Sidebar (fija en desktop, drawer en mobile) */}
       <aside
-        className={`fixed top-0 left-0 z-[75] flex h-screen w-[82%] max-w-[300px] flex-col border-r border-[var(--line)] bg-[var(--surface)] p-3.5 transition-transform duration-300 ease-out md:sticky md:z-auto md:w-auto md:max-w-none md:translate-x-0 ${
-          open ? "translate-x-0" : "-translate-x-full"
+        /* En celular entra desde la derecha, igual que el menú de la web
+           pública: el botón que lo abre está arriba a la derecha, así que el
+           panel aparece del mismo lado que el dedo. En escritorio vuelve a ser
+           la columna izquierda fija de la grilla. */
+        className={`fixed top-0 right-0 z-[75] flex h-screen w-[82%] max-w-[300px] flex-col border-l border-[var(--line)] bg-[var(--surface)] p-3.5 transition-transform duration-300 ease-out md:sticky md:right-auto md:z-auto md:w-auto md:max-w-none md:translate-x-0 md:border-l-0 md:border-r ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center gap-2.5 px-2 pb-[22px] pt-1.5">
