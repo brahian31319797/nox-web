@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getCategorias, getProductosAdmin } from "@/lib/productos";
-import { AlertIcon, CheckIcon, ExternalLinkIcon, PlusIcon, StarIcon } from "@/components/admin/icons";
+import { AlertIcon, CheckIcon, PlusIcon, StarIcon } from "@/components/admin/icons";
 import type { Producto } from "@/lib/types";
 
 /**
@@ -40,23 +40,13 @@ export default async function AdminInicioPage() {
             Un vistazo rápido al estado de la web.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2.5">
-          <Link
-            href="/"
-            target="_blank"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-4 py-2.5 text-sm font-bold text-[var(--ink-soft)] hover:text-[var(--ink)]"
-          >
-            <ExternalLinkIcon className="h-4 w-4" />
-            Ver la web
-          </Link>
-          <Link
-            href="/admin/productos/nuevo"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-bold text-[var(--accent-ink)]"
-          >
-            <PlusIcon className="h-4 w-4" />
-            Nuevo producto
-          </Link>
-        </div>
+        <Link
+          href="/admin/productos/nuevo"
+          className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-bold text-[var(--accent-ink)]"
+        >
+          <PlusIcon className="h-4 w-4" />
+          Nuevo producto
+        </Link>
       </div>
 
       <div className="grid gap-3.5 sm:grid-cols-3">

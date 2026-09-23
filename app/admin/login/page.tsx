@@ -39,7 +39,7 @@ function LoginForm() {
       return;
     }
 
-    router.push(searchParams.get("redirect") || "/admin/productos");
+    router.push(searchParams.get("redirect") || "/admin");
     router.refresh();
   }
 
