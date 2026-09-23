@@ -23,7 +23,7 @@ export function Footer() {
             antes y después de la compra.
           </p>
           <p className="mt-3 font-mono text-[11.5px] uppercase tracking-[0.1em] text-[var(--ink-faint)]">
-            Misiones, Argentina
+            Oberá, Misiones · Envío a todo el país
           </p>
         </div>
 
@@ -37,6 +37,9 @@ export function Footer() {
             </Link>
             <Link href="/productos" className="block py-2.5 text-sm md:py-1 text-[var(--ink-soft)] hover:text-[var(--accent-2)]">
               Productos
+            </Link>
+            <Link href="/preguntas-frecuentes" className="block py-2.5 text-sm md:py-1 text-[var(--ink-soft)] hover:text-[var(--accent-2)]">
+              Preguntas frecuentes
             </Link>
             <Link href="/contacto" className="block py-2.5 text-sm md:py-1 text-[var(--ink-soft)] hover:text-[var(--accent-2)]">
               Contacto

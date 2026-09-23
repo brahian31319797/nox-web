@@ -32,6 +32,7 @@ export function NegocioJsonLd() {
         sameAs: [NEGOCIO.instagram],
         address: {
           "@type": "PostalAddress",
+          addressLocality: NEGOCIO.ciudad,
           addressRegion: NEGOCIO.provincia,
           addressCountry: NEGOCIO.pais,
         },

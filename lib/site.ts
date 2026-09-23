@@ -25,10 +25,14 @@ export const NEGOCIO = {
   nombre: SITE_NAME,
   telefono: `+${WHATSAPP_NUMBER}`,
   instagram: INSTAGRAM_URL,
+  ciudad: "Oberá",
   provincia: "Misiones",
   pais: "AR",
-  /** Vende a todo el país aunque opere desde Misiones. */
+  /** Vende a todo el país aunque opere desde Oberá. */
   zonaDeVenta: "Argentina",
+  /** Único lugar donde el envío no se cobra, con entrega a domicilio. */
+  envioSinCargo: "Oberá, Misiones",
+  garantiaMeses: 3,
 } as const;
 
 export function urlAbsoluta(ruta: string): string {
