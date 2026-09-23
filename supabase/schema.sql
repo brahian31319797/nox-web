@@ -19,6 +19,9 @@ create table public.categorias (
 -- ─── PRODUCTOS ──────────────────────────────────────────────
 -- specs    : características técnicas, ej. [{"label":"Potencia motor","value":"500W"}]
 -- imagenes : urls públicas del bucket "productos" en Storage
+-- destacado: sale en la portada
+-- entrega  : plazo en texto libre ("7 a 10 días"). Reemplaza al stock porque
+--            se trabaja a pedido: importa el plazo, no las unidades.
 create table public.productos (
   id           uuid not null default gen_random_uuid(),
   slug         text not null unique,
@@ -31,6 +34,8 @@ create table public.productos (
   specs        jsonb not null default '[]'::jsonb,
   imagenes     text[] not null default '{}',
   publicado    boolean not null default true,
+  destacado    boolean not null default false,
+  entrega      text,
   orden        integer not null default 0,
   created_at   timestamptz not null default now(),
   updated_at   timestamptz not null default now(),
@@ -40,6 +45,7 @@ create table public.productos (
 
 create index productos_categoria_id_idx on public.productos (categoria_id);
 create index productos_publicado_idx on public.productos (publicado);
+create index productos_destacado_idx on public.productos (destacado) where destacado;
 
 -- ─── PROFILES (roles de admin) ──────────────────────────────
 -- Se completa a mano: después de crear el usuario en Authentication,

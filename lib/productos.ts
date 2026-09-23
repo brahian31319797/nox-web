@@ -104,3 +104,13 @@ export async function getProductosAdmin(): Promise<Producto[]> {
   }
   return data as Producto[];
 }
+
+/**
+ * Los productos que salen en la portada, a partir de una lista ya cargada.
+ * Si Brahian todavía no marcó ninguno caemos a los primeros del catálogo, para
+ * que la home nunca quede sin destacados; el panel de admin se lo avisa.
+ */
+export function elegirDestacados(publicados: Producto[], limite = 3): Producto[] {
+  const marcados = publicados.filter((p) => p.destacado);
+  return (marcados.length > 0 ? marcados : publicados).slice(0, limite);
+}

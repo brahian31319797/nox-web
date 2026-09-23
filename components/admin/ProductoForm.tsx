@@ -32,6 +32,8 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
   const [specs, setSpecs] = useState<Spec[]>(producto?.specs ?? [{ label: "", value: "" }]);
   const [imagenes, setImagenes] = useState<string[]>(producto?.imagenes ?? []);
   const [publicado, setPublicado] = useState(producto?.publicado ?? true);
+  const [destacado, setDestacado] = useState(producto?.destacado ?? false);
+  const [entrega, setEntrega] = useState(producto?.entrega ?? "");
 
   const [subiendo, setSubiendo] = useState(false);
   const [guardando, setGuardando] = useState(false);
@@ -76,6 +78,8 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
       specs: specs.filter((s) => s.label.trim() && s.value.trim()),
       imagenes,
       publicado,
+      destacado,
+      entrega: entrega.trim() || null,
     };
 
     const res = esEdicion ? await actualizarProducto(producto!.id, payload) : await crearProducto(payload);
@@ -191,6 +195,28 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
                 />
               </button>
             </div>
+
+            <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--line)] pt-4">
+              <div>
+                <div className="text-[13.5px] font-semibold">En la portada</div>
+                <div className="mt-0.5 text-[11.5px] text-[var(--ink-faint)]">
+                  Aparece en &ldquo;Destacados&rdquo; de la página de inicio
+                </div>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={destacado}
+                onClick={() => setDestacado((v) => !v)}
+                className={`flex h-[26px] w-11 flex-none items-center rounded-full p-[3px] transition-colors ${
+                  destacado ? "justify-end bg-[var(--accent-soft)]" : "justify-start bg-[var(--surface-3)]"
+                }`}
+              >
+                <span
+                  className={`h-5 w-5 rounded-full transition-colors ${destacado ? "bg-[var(--accent)]" : "bg-[var(--ink-faint)]"}`}
+                />
+              </button>
+            </div>
           </Panel>
         </div>
 
@@ -246,6 +272,25 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
                 className="h-full w-full bg-transparent text-[14.5px] outline-none placeholder:text-[var(--ink-faint)]"
               />
             </Field>
+
+            {/* Reemplaza al stock: como trabaja a pedido, lo que el cliente
+                necesita saber es cuándo lo recibe, no cuántos hay. */}
+            <Field label="Plazo de entrega">
+              <input
+                value={entrega}
+                onChange={(e) => setEntrega(e.target.value)}
+                list="plazos-sugeridos"
+                placeholder="Ej: 7 a 10 días"
+                className="h-full w-full bg-transparent text-[14.5px] outline-none placeholder:text-[var(--ink-faint)]"
+              />
+            </Field>
+            <datalist id="plazos-sugeridos">
+              <option value="Entrega inmediata" />
+              <option value="3 a 5 días" />
+              <option value="7 a 10 días" />
+              <option value="15 a 20 días" />
+              <option value="A pedido — consultar" />
+            </datalist>
 
             <div>
               <label className="mb-1.5 block text-[12.5px] font-semibold text-[var(--ink-soft)]">Descripción</label>

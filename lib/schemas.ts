@@ -20,6 +20,8 @@ export const productoSchema = z.object({
   specs: z.array(specSchema).default([]),
   imagenes: z.array(z.string().url()).default([]),
   publicado: z.coerce.boolean().default(true),
+  destacado: z.coerce.boolean().default(false),
+  entrega: z.string().trim().max(60).nullable().optional(),
 });
 
 export type ProductoFormValues = z.infer<typeof productoSchema>;

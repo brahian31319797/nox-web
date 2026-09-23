@@ -25,6 +25,11 @@ export interface Producto {
   specs: Spec[];
   imagenes: string[];
   publicado: boolean;
+  /** Sale en la portada. Antes la home tomaba los 3 primeros por `orden`. */
+  destacado: boolean;
+  /** Plazo de entrega en texto libre ("7 a 10 días"). Reemplaza al stock:
+      Brahian trabaja a pedido, así que no maneja unidades, maneja plazos. */
+  entrega: string | null;
   orden: number;
 }
 

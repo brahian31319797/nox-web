@@ -6,11 +6,11 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { SavingsCalculator } from "@/components/site/SavingsCalculator";
 import { ArrowRightIcon, WhatsAppIcon } from "@/components/site/icons";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
-import { getCategorias, getProductosPublicados } from "@/lib/productos";
+import { elegirDestacados, getCategorias, getProductosPublicados } from "@/lib/productos";
 
 export default async function HomePage() {
   const [categorias, productos] = await Promise.all([getCategorias(), getProductosPublicados()]);
-  const destacados = productos.slice(0, 3);
+  const destacados = elegirDestacados(productos);
   const hayCatalogo = productos.length > 0;
 
   return (

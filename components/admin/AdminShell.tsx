@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import { LogoMark } from "@/components/brand/Logo";
-import { ExternalLinkIcon, GridIcon, ListIcon, LogOutIcon } from "@/components/admin/icons";
+import { ExternalLinkIcon, GridIcon, HomeIcon, LogOutIcon } from "@/components/admin/icons";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
 const NAV = [
-  { href: "/admin/productos", label: "Productos", icon: GridIcon },
-  { href: "/admin/categorias", label: "Categorías", icon: ListIcon },
+  { href: "/admin", label: "Panel", icon: HomeIcon, exacto: true },
+  { href: "/admin/productos", label: "Productos", icon: GridIcon, exacto: false },
 ];
 
 export function AdminShell({
@@ -79,10 +79,10 @@ export function AdminShell({
 
         <nav className="flex flex-1 flex-col gap-0.5">
           <span className="px-2.5 pb-1.5 pt-3.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--ink-faint)]">
-            Catálogo
+            Gestión
           </span>
           {NAV.map((item) => {
-            const active = pathname.startsWith(item.href);
+            const active = item.exacto ? pathname === item.href : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}

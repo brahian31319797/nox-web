@@ -38,6 +38,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: true,
+    entrega: "7 a 10 días",
     orden: 1,
   },
   {
@@ -61,6 +63,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: true,
+    entrega: "7 a 10 días",
     orden: 2,
   },
   {
@@ -85,6 +89,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: false,
+    destacado: false,
+    entrega: "7 a 10 días",
     orden: 3,
   },
   {
@@ -109,6 +115,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: true,
+    entrega: "7 a 10 días",
     orden: 1,
   },
   {
@@ -133,6 +141,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: false,
+    entrega: "7 a 10 días",
     orden: 2,
   },
   {
@@ -157,6 +167,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: false,
+    entrega: "7 a 10 días",
     orden: 1,
   },
   {
@@ -181,6 +193,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: true,
+    destacado: false,
+    entrega: "7 a 10 días",
     orden: 2,
   },
   {
@@ -205,6 +219,8 @@ export const PRODUCTOS_SEED: Producto[] = [
     ],
     imagenes: [],
     publicado: false,
+    destacado: false,
+    entrega: "7 a 10 días",
     orden: 3,
   },
 ];

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeftIcon, BoltSpecIcon, CoinsIcon, InstagramIcon, WhatsAppIcon } from "@/components/site/icons";
+import { ArrowLeftIcon, BoltSpecIcon, CoinsIcon, InstagramIcon, WhatsAppIcon, TruckIcon } from "@/components/site/icons";
 import { ProductGallery } from "@/components/site/ProductGallery";
 import { fmtArs, fmtUsd } from "@/lib/format";
 import { getProductoBySlug } from "@/lib/productos";
@@ -51,10 +51,18 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
             <div className="mt-2 font-mono text-sm text-[var(--ink-soft)]">
               ≈ {fmtUsd(producto.precio_usd)} · precio de referencia
             </div>
-            <div className="mt-2.5 flex items-center gap-1.5 text-[12.5px] text-[var(--ink-faint)]">
-              <CoinsIcon className="h-3.5 w-3.5 text-[var(--accent)]" />
+            {/* Verde porque es plata a favor del cliente. Manual de marca §7.2 */}
+            <div className="mt-3 flex items-center gap-2 rounded-[10px] border border-[var(--money-line)] bg-[var(--money-soft)] px-3 py-2.5 text-[13px] font-semibold text-[var(--money)]">
+              <CoinsIcon className="h-4 w-4 flex-none" />
               Reservás con el 50% y pagás el resto al recibir
             </div>
+
+            {producto.entrega?.trim() && (
+              <div className="mt-2.5 flex items-center gap-2 text-[13px] text-[var(--ink-soft)]">
+                <TruckIcon className="h-4 w-4 flex-none text-[var(--ink-faint)]" />
+                Entrega: <b className="font-semibold text-[var(--ink)]">{producto.entrega}</b>
+              </div>
+            )}
           </div>
 
           <div className="mb-6 flex flex-wrap gap-2.5">
