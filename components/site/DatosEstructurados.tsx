@@ -8,13 +8,30 @@ import type { Producto } from "@/lib/types";
  * Solo declaramos lo que sabemos con certeza: no hay dirección ni horarios
  * porque no los tenemos, e inventarlos sería peor que omitirlos.
  */
+
+/**
+ * Caracteres que hay que neutralizar antes de meter JSON dentro de un <script>.
+ *
+ * JSON.stringify escapa comillas pero NO escapa "<". Un nombre de producto que
+ * contenga "</script>" cierra la etiqueta y todo lo que siga se interpreta
+ * como HTML de la página: eso es un XSS que se ejecuta en el navegador de
+ * cualquiera que abra la ficha, aunque el dato lo haya cargado el admin.
+ *
+ * \u2028 y \u2029 son saltos de línea que JSON permite pero JavaScript no:
+ * sin escaparlos, el navegador puede romper el parseo del bloque.
+ */
+const PELIGROSOS: Record<string, string> = {
+  "<": "\\u003c",
+  ">": "\\u003e",
+  "&": "\\u0026",
+  "\u2028": "\\u2028",
+  "\u2029": "\\u2029",
+};
+
 function Json({ data }: { data: object }) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  const json = JSON.stringify(data).replace(/[<>&\u2028\u2029]/g, (c) => PELIGROSOS[c]);
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
 export function NegocioJsonLd() {

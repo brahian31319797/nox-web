@@ -6,7 +6,7 @@ import { useRef, useState, useTransition } from "react";
 import { VehicleIcon } from "@/components/site/icons";
 import { AlertIcon, CheckIcon, TrashIcon, UploadIcon } from "@/components/admin/icons";
 import { actualizarCategoria } from "@/lib/actions/categorias";
-import { subirImagenCategoria } from "@/lib/upload";
+import { ArchivoInvalido, subirImagenCategoria } from "@/lib/upload";
 import type { Categoria } from "@/lib/types";
 
 /**
@@ -57,17 +57,13 @@ export function CategoriasManager({
 
   async function elegirArchivo(id: string, file: File | undefined) {
     if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      setError("Ese archivo no es una imagen.");
-      return;
-    }
     setError(null);
     setSubiendo(id);
     try {
       const url = await subirImagenCategoria(file);
       aplicar(id, url);
-    } catch {
-      setError("No se pudo subir la imagen. Probá de nuevo.");
+    } catch (e) {
+      setError(e instanceof ArchivoInvalido ? e.message : "No se pudo subir la imagen. Probá de nuevo.");
     } finally {
       setSubiendo(null);
     }

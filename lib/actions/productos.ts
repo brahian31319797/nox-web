@@ -1,72 +1,70 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createSupabaseServer } from "@/lib/supabase-server";
 import { productoSchema } from "@/lib/schemas";
+import { autorizarAdmin, errorPublicable, registrarInputInvalido } from "./guard";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
-function checkConfigured(): ActionResult | null {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    return { ok: false, error: "Supabase todavía no está conectado (falta .env.local)." };
-  }
-  return null;
-}
+/**
+ * Todas las acciones de este archivo empiezan por autorizarAdmin().
+ *
+ * Una server action es un endpoint POST invocable desde afuera: el middleware
+ * protege la navegación a /admin, no la llamada directa. RLS sigue siendo la
+ * última barrera, pero no puede ser la única.
+ */
 
 function revalidarCatalogo() {
+  revalidatePath("/admin");
   revalidatePath("/admin/productos");
+  revalidatePath("/admin/categorias");
   revalidatePath("/productos");
   revalidatePath("/");
 }
 
 export async function crearProducto(input: unknown): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("crearProducto");
+  if (!auth.ok) return auth;
 
   const parsed = productoSchema.safeParse(input);
   if (!parsed.success) {
+    registrarInputInvalido("crearProducto", parsed.error.issues[0]?.path.join(".") ?? "?");
     return { ok: false, error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase.from("productos").insert(parsed.data);
-  if (error) {
-    return { ok: false, error: error.code === "23505" ? "Ya existe un producto con ese slug." : error.message };
-  }
+  const { error } = await auth.supabase.from("productos").insert(parsed.data);
+  if (error) return { ok: false, error: errorPublicable("crearProducto", error) };
 
   revalidarCatalogo();
   return { ok: true };
 }
 
 export async function actualizarProducto(id: string, input: unknown): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("actualizarProducto");
+  if (!auth.ok) return auth;
 
   const parsed = productoSchema.safeParse(input);
   if (!parsed.success) {
+    registrarInputInvalido("actualizarProducto", parsed.error.issues[0]?.path.join(".") ?? "?");
     return { ok: false, error: parsed.error.issues[0]?.message ?? "Datos inválidos" };
   }
 
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase
+  const { error } = await auth.supabase
     .from("productos")
     .update({ ...parsed.data, updated_at: new Date().toISOString() })
     .eq("id", id);
-  if (error) {
-    return { ok: false, error: error.code === "23505" ? "Ya existe un producto con ese slug." : error.message };
-  }
+  if (error) return { ok: false, error: errorPublicable("actualizarProducto", error) };
 
   revalidarCatalogo();
   return { ok: true };
 }
 
 export async function eliminarProducto(id: string): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("eliminarProducto");
+  if (!auth.ok) return auth;
 
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase.from("productos").delete().eq("id", id);
-  if (error) return { ok: false, error: error.message };
+  const { error } = await auth.supabase.from("productos").delete().eq("id", id);
+  if (error) return { ok: false, error: errorPublicable("eliminarProducto", error) };
 
   revalidarCatalogo();
   return { ok: true };
@@ -74,15 +72,14 @@ export async function eliminarProducto(id: string): Promise<ActionResult> {
 
 /** Marca o desmarca un producto como destacado de la portada. */
 export async function alternarDestacado(id: string, destacado: boolean): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("alternarDestacado");
+  if (!auth.ok) return auth;
 
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase
+  const { error } = await auth.supabase
     .from("productos")
     .update({ destacado, updated_at: new Date().toISOString() })
     .eq("id", id);
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, error: errorPublicable("alternarDestacado", error) };
 
   revalidarCatalogo();
   return { ok: true };
@@ -90,15 +87,14 @@ export async function alternarDestacado(id: string, destacado: boolean): Promise
 
 /** Publica u oculta sin tener que entrar a editar el producto entero. */
 export async function alternarPublicado(id: string, publicado: boolean): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("alternarPublicado");
+  if (!auth.ok) return auth;
 
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase
+  const { error } = await auth.supabase
     .from("productos")
     .update({ publicado, updated_at: new Date().toISOString() })
     .eq("id", id);
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, error: errorPublicable("alternarPublicado", error) };
 
   revalidarCatalogo();
   return { ok: true };
@@ -110,20 +106,19 @@ export async function alternarPublicado(id: string, publicado: boolean): Promise
  * aparezca a medio hacer en la web.
  */
 export async function duplicarProducto(id: string): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("duplicarProducto");
+  if (!auth.ok) return auth;
 
-  const supabase = await createSupabaseServer();
-  const { data: original, error: errorLectura } = await supabase
+  const { data: original, error: errorLectura } = await auth.supabase
     .from("productos")
     .select("*")
     .eq("id", id)
     .maybeSingle();
 
-  if (errorLectura) return { ok: false, error: errorLectura.message };
+  if (errorLectura) return { ok: false, error: errorPublicable("duplicarProducto", errorLectura) };
   if (!original) return { ok: false, error: "No encontramos el producto que querías duplicar." };
 
-  const { data: ultimo } = await supabase
+  const { data: ultimo } = await auth.supabase
     .from("productos")
     .select("orden")
     .order("orden", { ascending: false })
@@ -132,7 +127,7 @@ export async function duplicarProducto(id: string): Promise<ActionResult> {
 
   // El slug es único en la base: buscamos el primer sufijo libre en vez de
   // dejar que el insert falle con un 23505 que no le dice nada a Brahian.
-  const { data: parecidos } = await supabase
+  const { data: parecidos } = await auth.supabase
     .from("productos")
     .select("slug")
     .like("slug", `${original.slug}-copia%`);
@@ -149,7 +144,7 @@ export async function duplicarProducto(id: string): Promise<ActionResult> {
   delete resto.created_at;
   delete resto.updated_at;
 
-  const { error } = await supabase.from("productos").insert({
+  const { error } = await auth.supabase.from("productos").insert({
     ...resto,
     slug,
     nombre: `${original.nombre} (copia)`,
@@ -157,7 +152,7 @@ export async function duplicarProducto(id: string): Promise<ActionResult> {
     destacado: false,
     orden: (ultimo?.orden ?? 0) + 1,
   });
-  if (error) return { ok: false, error: error.message };
+  if (error) return { ok: false, error: errorPublicable("duplicarProducto", error) };
 
   revalidarCatalogo();
   return { ok: true };
@@ -169,16 +164,21 @@ export async function duplicarProducto(id: string): Promise<ActionResult> {
  * paralelo es más simple que armar un upsert masivo y rinde igual.
  */
 export async function reordenarProductos(ids: string[]): Promise<ActionResult> {
-  const notConfigured = checkConfigured();
-  if (notConfigured) return notConfigured;
+  const auth = await autorizarAdmin("reordenarProductos");
+  if (!auth.ok) return auth;
 
-  const supabase = await createSupabaseServer();
+  // Un array enorme desde afuera sería una forma barata de generar carga.
+  if (!Array.isArray(ids) || ids.length === 0 || ids.length > 500) {
+    registrarInputInvalido("reordenarProductos", `cantidad=${Array.isArray(ids) ? ids.length : "no-array"}`);
+    return { ok: false, error: "La lista de productos no es válida." };
+  }
+
   const resultados = await Promise.all(
-    ids.map((id, indice) => supabase.from("productos").update({ orden: indice + 1 }).eq("id", id))
+    ids.map((id, indice) => auth.supabase.from("productos").update({ orden: indice + 1 }).eq("id", id))
   );
 
   const fallo = resultados.find((r) => r.error);
-  if (fallo?.error) return { ok: false, error: fallo.error.message };
+  if (fallo?.error) return { ok: false, error: errorPublicable("reordenarProductos", fallo.error) };
 
   revalidarCatalogo();
   return { ok: true };

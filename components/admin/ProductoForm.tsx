@@ -9,7 +9,7 @@ import { AlertIcon, CheckIcon, PlusIcon, UploadIcon } from "@/components/admin/i
 import { actualizarProducto, crearProducto } from "@/lib/actions/productos";
 import { centsToDecimalDisplay, digitsFromInput } from "@/lib/format";
 import { slugify } from "@/lib/schemas";
-import { subirImagenProducto } from "@/lib/upload";
+import { ArchivoInvalido, subirImagenProducto } from "@/lib/upload";
 import type { Categoria, Producto, Spec } from "@/lib/types";
 
 export function ProductoForm({ categorias, producto }: { categorias: Categoria[]; producto?: Producto }) {
@@ -51,8 +51,10 @@ export function ProductoForm({ categorias, producto }: { categorias: Categoria[]
     try {
       const urls = await Promise.all(Array.from(files).map(subirImagenProducto));
       setImagenes((prev) => [...prev, ...urls]);
-    } catch {
-      setError("No se pudo subir la foto. Probá de nuevo.");
+    } catch (e) {
+      // Si el archivo no pasó la validación, decimos por qué; cualquier otra
+      // falla es del servidor y no aporta detallarla.
+      setError(e instanceof ArchivoInvalido ? e.message : "No se pudo subir la foto. Probá de nuevo.");
     } finally {
       setSubiendo(false);
     }
