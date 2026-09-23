@@ -125,3 +125,69 @@
     border-radius: 4px;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Botón flotante de WhatsApp
+
+   Dos animaciones que se turnan para pedir atención sin marear:
+   el halo late de fondo todo el tiempo y, cada ~6 segundos, el
+   botón hace una sacudida corta. Si alguien configuró su sistema
+   para reducir el movimiento, las dos se apagan.
+   ───────────────────────────────────────────────────────────── */
+@layer utilities {
+  @keyframes wa-halo {
+    0% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    70% {
+      transform: scale(2.1);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(2.1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes wa-sacudida {
+    0%,
+    80%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    84% {
+      transform: scale(1.12) rotate(-9deg);
+    }
+    88% {
+      transform: scale(1.08) rotate(7deg);
+    }
+    92% {
+      transform: scale(1.04) rotate(-4deg);
+    }
+    96% {
+      transform: scale(1.01) rotate(1deg);
+    }
+  }
+
+  .wa-fab {
+    animation: wa-sacudida 6s ease-in-out infinite;
+  }
+
+  .wa-halo {
+    animation: wa-halo 2.6s cubic-bezier(0.25, 0.6, 0.35, 1) infinite;
+  }
+
+  /* El botón crece bajo el dedo o el cursor: confirma que se puede tocar. */
+  .wa-fab:active {
+    transform: scale(0.94);
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab,
+    .wa-halo {
+      animation: none;
+    }
+  }
+}
