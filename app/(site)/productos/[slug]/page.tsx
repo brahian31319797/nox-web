@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const descripcion =
     producto.descripcion?.trim() ||
-    `${producto.nombre} — ${producto.categoria.nombre}. Envío a todo el país, pagás 50% y el resto al recibir.`;
+    `${producto.nombre} — ${producto.categoria.nombre}. Envío a todo el país y opciones de financiación.`;
 
   return {
     title: producto.nombre,
@@ -89,7 +89,7 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
             {/* Verde porque es plata a favor del cliente. Manual de marca §7.2 */}
             <div className="mt-3 flex items-center gap-2 rounded-[10px] border border-[var(--money-line)] bg-[var(--money-soft)] px-3 py-2.5 text-[13px] font-semibold text-[var(--money)]">
               <CoinsIcon className="h-4 w-4 flex-none" />
-              Reservás con el 50% y pagás el resto al recibir
+              Hay opciones de financiación · Consultame
             </div>
 
             {producto.entrega?.trim() && (

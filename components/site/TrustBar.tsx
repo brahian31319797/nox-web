@@ -7,7 +7,7 @@
  * por líneas, dato grande arriba— que además es el lenguaje visual del rubro.
  */
 const DATOS = [
-  { dato: "50%", unidad: "y el resto al recibir", desc: "Reservás con la mitad. El saldo cuando lo tenés en la mano.", money: true },
+  { dato: "Financiación", unidad: "a convenir", desc: "Escribime y vemos la forma de pago que mejor te sirva.", money: true },
   { dato: "24", unidad: "provincias", desc: "Envío a todo el país. Te confirmo el plazo antes de que pagues.", money: false },
   { dato: "1 a 1", unidad: "por WhatsApp", desc: "Te asesoro yo, antes y después de la compra.", money: false },
 ];
@@ -25,9 +25,9 @@ export function TrustBar() {
           >
             <div className="flex items-baseline gap-2">
               <span
-                className={`font-display text-[34px] font-black leading-none tracking-[-0.04em] md:text-[40px] ${
-                  d.money ? "text-[var(--money)]" : "text-[var(--ink)]"
-                }`}
+                className={`font-display font-black leading-none tracking-[-0.04em] ${
+                  d.dato.length > 6 ? "text-[26px] md:text-[30px]" : "text-[34px] md:text-[40px]"
+                } ${d.money ? "text-[var(--money)]" : "text-[var(--ink)]"}`}
               >
                 {d.dato}
               </span>

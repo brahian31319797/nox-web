@@ -27,7 +27,7 @@ export const metadata = {
 const PREGUNTAS = [
   {
     p: "¿Cómo se paga?",
-    r: `Reservás con el 50% y pagás el resto cuando lo recibís y lo probaste. Acepto transferencia bancaria, efectivo, dólares billete y USDT. No arriesgás toda la plata de una: esa es la idea.`,
+    r: `Acepto transferencia bancaria, efectivo, dólares billete y USDT. También manejo opciones de financiación: escribime y vemos la que mejor te sirva a vos.`,
   },
   {
     p: "¿El envío está incluido en el precio?",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InstagramIcon } from "@/components/site/icons";
 import { LogoMark } from "@/components/brand/Logo";
+import { SITE_NAME } from "@/lib/site";
 import { buildGeneralWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
 
 const CATEGORIAS = [
@@ -16,7 +17,7 @@ export function Footer() {
         <div className="max-w-[34ch]">
           <Link href="/" className="-my-2 flex items-center gap-2.5 py-2 font-display text-[17px] font-extrabold">
             <LogoMark className="h-[30px] w-[30px] flex-none" />
-            Brahian González
+            {SITE_NAME}
           </Link>
           <p className="mt-3 text-[13.5px] leading-relaxed text-[var(--ink-soft)]">
             Monopatines, motos y bicis eléctricas con envío a todo el país. Te asesoro yo,
@@ -85,7 +86,7 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-9 flex max-w-[1180px] flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-5 font-mono text-[12.5px] text-[var(--ink-faint)]">
-        <span>© {new Date().getFullYear()} Brahian González</span>
+        <span>© {new Date().getFullYear()} {SITE_NAME}</span>
         <span>
           Design by{" "}
           <a

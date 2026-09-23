@@ -15,10 +15,10 @@ export const SITE_URL = (
     : "http://localhost:3000")
 ).replace(/\/$/, "");
 
-export const SITE_NAME = "Brahian González";
+export const SITE_NAME = "BG Importados";
 
 export const SITE_DESCRIPTION =
-  "Dejá de pagar por moverte. Monopatines, motos y bicicletas eléctricas con envío a todo el país. Pagás 50% y el resto al recibir.";
+  "Dejá de pagar por moverte. Monopatines, motos y bicicletas eléctricas con envío a todo el país y opciones de financiación.";
 
 /** Datos del negocio para los buscadores (schema.org). Solo lo que sabemos. */
 export const NEGOCIO = {

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { MenuIcon, WhatsAppIcon, XIcon } from "@/components/site/icons";
 import { Logo, LogoMark } from "@/components/brand/Logo";
+import { SITE_NAME } from "@/lib/site";
 
 const LINKS = [
   { href: "/", label: "Inicio" },
@@ -22,7 +23,7 @@ export function Header() {
     <>
       <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--canvas)]/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-[1180px] items-center gap-4 px-5">
-          <Link href="/" aria-label="Brahian González — inicio" className="-my-2 flex items-center py-2">
+          <Link href="/" aria-label={`${SITE_NAME} — inicio`} className="-my-2 flex items-center py-2">
             <Logo compact />
           </Link>
 
@@ -72,7 +73,7 @@ export function Header() {
         <div className="flex h-11 items-center justify-between px-5 pt-5">
           <span className="flex items-center gap-2.5 font-display text-lg font-extrabold">
             <LogoMark className="h-8 w-8 flex-none" />
-            Brahian González
+            {SITE_NAME}
           </span>
           <button
             className="grid h-11 w-11 place-items-center rounded-[10px] border border-[var(--line)]"

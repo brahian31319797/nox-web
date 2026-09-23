@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { AlertIcon, LockIcon, UserIcon } from "@/components/admin/icons";
 import { ArrowRightIcon } from "@/components/site/icons";
 import { LogoMark } from "@/components/brand/Logo";
+import { SITE_NAME } from "@/lib/site";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
 const SUPABASE_CONFIGURADO = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
@@ -49,7 +50,7 @@ function LoginForm() {
         <div className="mb-7 flex items-center gap-2.5">
           <LogoMark className="h-[34px] w-[34px] flex-none" />
           <div>
-            <b className="block font-display text-base font-extrabold">Brahian González</b>
+            <b className="block font-display text-base font-extrabold">{SITE_NAME}</b>
             <span className="block font-mono text-[9.5px] uppercase tracking-[0.14em] text-[var(--ink-faint)]">
               Panel de administración
             </span>

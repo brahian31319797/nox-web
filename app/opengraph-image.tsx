@@ -70,7 +70,7 @@ export default async function Image() {
               borderRadius: 999,
             }}
           >
-            Pagás 50% y el resto al recibir
+            Con financiación
           </span>
           <span style={{ color: "#a8a6a1", fontSize: 24 }}>Envío a todo el país</span>
         </div>

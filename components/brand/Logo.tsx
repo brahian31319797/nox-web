@@ -1,5 +1,7 @@
+import { SITE_NAME } from "@/lib/site";
+
 /**
- * Identidad de Brahian González — ver docs/manual-de-marca.md
+ * Identidad de BG Importados — ver docs/manual-de-marca.md
  *
  * Monograma BG con franjas diagonales que sugieren movimiento. Las franjas son
  * el elemento que más rápido se reconoce, por eso son lo único que sobrevive en
@@ -10,7 +12,7 @@
 /** Isotipo: el monograma solo. Para header, panel admin y contextos chicos. */
 export function LogoMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Brahian González">
+    <svg viewBox="0 0 64 64" className={className} role="img" aria-label={SITE_NAME}>
       <rect width="64" height="64" rx="15" fill="#151517" />
       <rect x="0.6" y="0.6" width="62.8" height="62.8" rx="14.4" fill="none" stroke="#2f2f34" strokeWidth="1.2" />
       <text
@@ -52,7 +54,7 @@ export function Logo({
             compact ? "text-[13.5px]" : "text-[15px]"
           }`}
         >
-          Brahian González
+          {SITE_NAME}
         </b>
         <span
           className={`mt-1 block font-mono uppercase tracking-[0.14em] text-[var(--ink-faint)] ${

@@ -1,7 +1,7 @@
-# Manual de marca — Brahian González
+# Manual de marca — BG Importados
 
-> Movilidad eléctrica · Misiones, con envío a todo el país
-> Versión 1.0 — 22 de septiembre de 2026
+> Movilidad eléctrica · Oberá, Misiones, con envío a todo el país
+> Versión 1.1 — 23 de septiembre de 2026
 
 ---
 
@@ -40,7 +40,9 @@ Esto no es marketing, es lo que efectivamente ofrece:
 
 1. **Trato directo y asesoramiento honesto** — hablás con una persona que sabe
    del tema, no con un local ni un chatbot.
-2. **Pagás 50% y el resto al recibir** — no arriesgás toda la plata de una.
+2. **Hay financiación** — la forma de pago se arma con cada cliente, según lo
+   que pueda entregar. No hay un esquema fijo, y por eso la web no promete uno:
+   dice que la opción existe e invita a consultar.
 3. **Precio de importación directa** — trae él la mercadería, sin el margen del
    revendedor.
 
@@ -50,16 +52,17 @@ Esto no es marketing, es lo que efectivamente ofrece:
 |---|---|
 | **Franqueza** | Le decimos al cliente si el modelo que eligió no le sirve. Preferimos perder una venta antes que venderle mal. |
 | **Cercanía** | Habla con una persona, antes, durante y después de la compra. |
-| **Riesgo compartido** | Paga la mitad y el resto cuando lo tiene en la mano. Nosotros ponemos la confianza primero. |
+| **Nos acomodamos** | La forma de pago se arma según lo que cada uno pueda. No hay una fórmula única, y eso es una ventaja, no un problema. |
 | **Sin vueltas** | Precio claro, tiempo de entrega real, cero letra chica. |
 
 ## 6. Tono de voz
 
 **La regla que manda: hablamos en primera persona**
 
-La web es Brahian hablando, no alguien contando qué hace Brahian. Es marca
-personal: si la página habla de él en tercera persona, suena a empresa con
-vendedores, que es exactamente lo contrario de lo que lo diferencia.
+La web es Brahian hablando, no alguien contando qué hace Brahian. Aunque la
+marca se llame BG Importados, atiende una persona: si la página habla de él en
+tercera persona suena a empresa con vendedores, que es exactamente lo contrario
+de lo que lo diferencia.
 
 | Nunca | Siempre |
 |---|---|
@@ -73,7 +76,7 @@ El plural solo se usa cuando incluye al cliente: *"lo coordinamos juntos"* está
 bien, porque ahí el "nosotros" son Brahian y quien compra.
 
 Única excepción: el nombre de la marca en el logo, los títulos de página y el
-pie. Ahí "Brahian González" es la firma, no la voz.
+pie. Ahí "BG Importados" es la firma, no la voz.
 
 **Cómo hablamos**
 
@@ -98,8 +101,8 @@ pie. Ahí "Brahian González" es la firma, no la voz.
 
 **Ejemplos aplicados**
 
-- Producto agotado → *"Este lo traemos a pedido. Entrega en 7 a 10 días."*
-- Precio alto → *"Sale $X. Pagás la mitad ahora y el resto cuando lo recibís."*
+- Producto agotado → *"Este lo traigo a pedido. Entrega en 7 a 10 días."*
+- Precio alto → *"Sale $X. Contame cuánto podés poner y vemos cómo lo armamos."*
 - Cliente indeciso → *"Contame cuánto andás por día y te digo cuál te sirve."*
 
 ## 7. Sistema visual
@@ -111,7 +114,7 @@ Marca personal: el nombre es el activo.
 
 **Versiones**
 
-- **Completa**: monograma + "Brahian González" + bajada "Movilidad eléctrica".
+- **Completa**: monograma + "BG Importados" + bajada "Movilidad eléctrica".
 - **Isotipo**: solo el monograma con las franjas. Para header y contextos chicos.
 - **Reducida (favicon, 16–32px)**: las franjas y la inicial. Las dos letras se
   empastan a ese tamaño, por eso se simplifica.
@@ -129,7 +132,7 @@ Cada color tiene un trabajo asignado. Esto no es decoración, es información.
 |---|---|---|
 | **Base** | `#0A0A0B` | Fondo de todo el sitio |
 | **Acción** | `#FF5A1F` | Botones, CTAs, lo que empuja a hacer algo |
-| **Ahorro** | `#7DDCB0` | Todo lo que habla de plata: ahorro calculado, seña del 50% |
+| **Ahorro** | `#7DDCB0` | Todo lo que habla de plata: ahorro calculado, financiación |
 | **Texto** | `#F5F4F1` | Texto principal |
 | **Error** | `#FF7A90` | Solo en el panel: avisos y acciones destructivas |
 
@@ -232,7 +235,9 @@ que no es. Se elimina el fallback: si la base no responde, el sitio lo dice.
 | Tema | Decisión |
 |---|---|
 | Modelo de venta | Catálogo + cierre por WhatsApp. Sin carrito ni pagos online. |
-| Marca | Nombre propio: Brahian González. |
+| Marca | **BG Importados**. El nombre sale de `lib/site.ts`, no se escribe a mano en los componentes. |
+| Voz | Sigue en primera persona aunque la marca ya no sea el nombre propio: atiende Brahian y esa cercanía es el diferencial. |
+| Financiación | Existe, pero es variable según el cliente. La web dice que hay, no cómo es. |
 | Stock | No maneja. Trabaja a pedido, se muestran tiempos de entrega. |
 | Logo | Monograma BG con franjas de movimiento (opción C). |
 | Zona | Misiones, con envío a todo el país. |

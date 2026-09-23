@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import { LogoMark } from "@/components/brand/Logo";
+import { SITE_NAME } from "@/lib/site";
 import { ExternalLinkIcon, GridIcon, HomeIcon, ListIcon, LogOutIcon } from "@/components/admin/icons";
 import { createSupabaseBrowser } from "@/lib/supabase";
 
@@ -41,7 +42,7 @@ export function AdminShell({
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-[var(--line)] bg-[var(--surface)] px-4 py-3 md:hidden">
         <div className="flex items-center gap-2.5">
           <LogoMark className="h-7 w-7 flex-none" />
-          <b className="font-display text-sm font-extrabold">Brahian González</b>
+          <b className="font-display text-sm font-extrabold">{SITE_NAME}</b>
         </div>
         <button
           onClick={() => setOpen(true)}
@@ -71,7 +72,7 @@ export function AdminShell({
         <div className="flex items-center gap-2.5 px-2 pb-[22px] pt-1.5">
           <LogoMark className="h-8 w-8 flex-none" />
           <div>
-            <b className="block font-display text-[14.5px] font-extrabold">Brahian González</b>
+            <b className="block font-display text-[14.5px] font-extrabold">{SITE_NAME}</b>
             <span className="block font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--ink-faint)]">
               Panel admin
             </span>
