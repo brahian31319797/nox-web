@@ -21,7 +21,7 @@ export function Header() {
     <>
       <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--canvas)]/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-[1180px] items-center gap-4 px-5">
-          <Link href="/" aria-label="Brahian González — inicio">
+          <Link href="/" aria-label="Brahian González — inicio" className="-my-2 flex items-center py-2">
             <Logo compact />
           </Link>
 
@@ -53,7 +53,7 @@ export function Header() {
           </a>
 
           <button
-            className="ml-auto grid h-10 w-10 place-items-center rounded-[10px] border border-[var(--line)] text-[var(--ink)] md:hidden"
+            className="ml-auto grid h-11 w-11 place-items-center rounded-[10px] border border-[var(--line)] text-[var(--ink)] md:hidden"
             aria-label="Menú"
             onClick={() => setOpen(true)}
           >
@@ -74,7 +74,7 @@ export function Header() {
             Brahian González
           </span>
           <button
-            className="grid h-10 w-10 place-items-center rounded-[10px] border border-[var(--line)]"
+            className="grid h-11 w-11 place-items-center rounded-[10px] border border-[var(--line)]"
             aria-label="Cerrar"
             onClick={() => setOpen(false)}
           >

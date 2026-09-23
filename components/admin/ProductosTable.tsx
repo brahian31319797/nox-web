@@ -23,7 +23,10 @@ import {
 } from "@/lib/actions/productos";
 import type { Categoria, Producto } from "@/lib/types";
 
-const COLUMNAS = "grid-cols-[28px_44px_1fr_84px] md:grid-cols-[28px_48px_2fr_1fr_1fr_112px]";
+/* En celular la fila deja de ser una grilla y se apila: cinco botones de 16px
+   dentro de 320px no se pueden tocar, y el nombre quedaba cortado en dos
+   letras. De md para arriba vuelve a ser tabla. */
+const COLUMNAS = "md:grid-cols-[28px_48px_2fr_1fr_1fr_112px]";
 
 export function ProductosTable({ productos, categorias }: { productos: Producto[]; categorias: Categoria[] }) {
   const [lista, setLista] = useState(productos);
@@ -142,7 +145,7 @@ export function ProductosTable({ productos, categorias }: { productos: Producto[
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar producto…"
-            className="w-full bg-transparent text-sm outline-none placeholder:text-[var(--ink-faint)]"
+            className="h-full w-full bg-transparent text-sm outline-none placeholder:text-[var(--ink-faint)]"
           />
         </div>
         <Chip label="Todos" active={categoriaActiva === "all"} onClick={() => setCategoriaActiva("all")} />
@@ -175,31 +178,44 @@ export function ProductosTable({ productos, categorias }: { productos: Producto[
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => soltar(p.id)}
             onDragEnd={() => setArrastrando(null)}
-            className={`grid ${COLUMNAS} items-center gap-3 border-t border-[var(--line)] px-4 py-3 md:gap-3.5 md:first:border-t-0 ${
+            className={`border-t border-[var(--line)] px-3.5 py-3.5 md:grid ${COLUMNAS} md:items-center md:gap-3.5 md:px-4 md:py-3 md:first:border-t-0 ${
               arrastrando === p.id ? "opacity-40" : "hover:bg-[var(--surface-2)]"
             } ${!p.publicado ? "opacity-70" : ""}`}
           >
-            <span
-              aria-hidden
-              className={`text-[var(--ink-faint)] ${puedeOrdenar ? "cursor-grab active:cursor-grabbing" : "opacity-30"}`}
-            >
-              <DragIcon className="h-4 w-4" />
-            </span>
+            {/* md:contents disuelve este envoltorio en escritorio para que los
+                tres hijos caigan como columnas de la grilla. */}
+            <div className="flex items-start gap-3 md:contents">
+              <span
+                aria-hidden
+                className={`mt-1 flex-none text-[var(--ink-faint)] md:mt-0 md:self-center ${
+                  puedeOrdenar ? "cursor-grab active:cursor-grabbing" : "opacity-30"
+                }`}
+              >
+                <DragIcon className="h-4 w-4" />
+              </span>
 
-            <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-[9px] border border-[var(--line)] bg-[var(--surface-3)]">
-              {p.imagenes[0] ? (
-                <Image src={p.imagenes[0]} alt={p.nombre} width={44} height={44} className="h-full w-full object-cover" />
-              ) : (
-                <VehicleIcon categoria={p.categoria.slug} className="w-[60%] text-[var(--ink-soft)]" />
-              )}
-            </div>
+              <div className="grid h-11 w-11 flex-none place-items-center overflow-hidden rounded-[9px] border border-[var(--line)] bg-[var(--surface-3)]">
+                {p.imagenes[0] ? (
+                  <Image src={p.imagenes[0]} alt={p.nombre} width={44} height={44} className="h-full w-full object-cover" />
+                ) : (
+                  <VehicleIcon categoria={p.categoria.slug} className="w-[60%] text-[var(--ink-soft)]" />
+                )}
+              </div>
 
-            <div className="min-w-0">
-              <div className="truncate text-[14.5px] font-bold">{p.nombre}</div>
-              <div className="mt-0.5 flex flex-wrap items-center gap-x-2 font-mono text-[10.5px] uppercase text-[var(--ink-faint)]">
-                <span>{p.categoria.nombre}</span>
-                {!p.publicado && <span className="text-[var(--ink-faint)]">· Oculto</span>}
-                {p.imagenes.length === 0 && <span className="text-[var(--danger)]">· Sin foto</span>}
+              <div className="min-w-0 flex-1">
+                <div className="text-[14.5px] font-bold leading-snug md:truncate">{p.nombre}</div>
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-2 font-mono text-[10.5px] uppercase text-[var(--ink-faint)]">
+                  <span>{p.categoria.nombre}</span>
+                  {!p.publicado && <span>· Oculto</span>}
+                  {p.imagenes.length === 0 && <span className="text-[var(--danger)]">· Sin foto</span>}
+                </div>
+                {/* En celular el precio y la entrega viven acá; en escritorio
+                    tienen columna propia. */}
+                <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2.5 font-mono text-[12px] md:hidden">
+                  <b className="text-[13.5px] tabular-nums">{fmtArs(p.precio_ars)}</b>
+                  <span className="text-[var(--ink-faint)]">{fmtUsd(p.precio_usd)}</span>
+                  {p.entrega?.trim() && <span className="text-[var(--ink-soft)]">· {p.entrega}</span>}
+                </div>
               </div>
             </div>
 
@@ -212,7 +228,7 @@ export function ProductosTable({ productos, categorias }: { productos: Producto[
               {p.entrega?.trim() || <span className="text-[var(--ink-faint)]">—</span>}
             </div>
 
-            <div className="flex justify-end gap-0.5">
+            <div className="mt-3 flex items-center justify-between gap-1 border-t border-[var(--line)] pt-2.5 md:mt-0 md:justify-end md:gap-0.5 md:border-0 md:pt-0">
               <IconButton
                 label={p.destacado ? "Sacar de la portada" : "Poner en la portada"}
                 onClick={() => optimista(p.id, { destacado: !p.destacado }, () => alternarDestacado(p.id, !p.destacado))}
@@ -247,7 +263,7 @@ export function ProductosTable({ productos, categorias }: { productos: Producto[
               <Link
                 href={`/admin/productos/${p.id}`}
                 aria-label={`Editar ${p.nombre}`}
-                className="grid h-8 w-8 place-items-center rounded-lg text-[var(--ink-soft)] hover:bg-[var(--surface-3)] hover:text-[var(--ink)]"
+                className="grid h-11 w-11 place-items-center rounded-lg text-[var(--ink-soft)] hover:bg-[var(--surface-3)] hover:text-[var(--ink)] md:h-8 md:w-8"
               >
                 <PencilIcon className="h-4 w-4" />
               </Link>
@@ -325,7 +341,7 @@ function IconButton({
       title={label}
       onClick={onClick}
       disabled={disabled}
-      className={`grid h-8 w-8 place-items-center rounded-lg text-[var(--ink-soft)] transition-colors hover:bg-[var(--surface-3)] disabled:opacity-40 ${className}`}
+      className={`grid h-11 w-11 place-items-center rounded-lg text-[var(--ink-soft)] transition-colors hover:bg-[var(--surface-3)] disabled:opacity-40 md:h-8 md:w-8 ${className}`}
     >
       {children}
     </button>
@@ -336,7 +352,7 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
   return (
     <button
       onClick={onClick}
-      className={`whitespace-nowrap rounded-full border-[1.5px] px-4 py-2 text-[13px] font-semibold transition-colors ${
+      className={`min-h-[44px] whitespace-nowrap rounded-full border-[1.5px] px-4 py-2 text-[13px] font-semibold transition-colors md:min-h-0 ${
         active ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--canvas)]" : "border-[var(--line)] text-[var(--ink-soft)] hover:border-[var(--line-strong)]"
       }`}
     >

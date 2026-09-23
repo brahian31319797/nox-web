@@ -45,7 +45,7 @@ export function AdminShell({
         <button
           onClick={() => setOpen(true)}
           aria-label="Menú"
-          className="grid h-[38px] w-[38px] flex-none place-items-center rounded-[10px] border border-[var(--line)]"
+          className="grid h-11 w-11 flex-none place-items-center rounded-[10px] border border-[var(--line)]"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-[18px] w-[18px]">
             <path d="M3 6h18M3 12h18M3 18h18" />
@@ -132,7 +132,7 @@ export function AdminShell({
           </div>
           <button
             onClick={handleLogout}
-            className="mt-2 flex w-full items-center gap-2.5 rounded-[9px] px-2.5 py-2.5 text-[13px] font-semibold text-[var(--ink-faint)] hover:bg-[var(--danger-soft)] hover:text-[var(--danger)]"
+            className="mt-2 flex min-h-[44px] w-full items-center gap-2.5 rounded-[9px] px-2.5 py-2.5 text-[13px] font-semibold text-[var(--ink-faint)] hover:bg-[var(--danger-soft)] hover:text-[var(--danger)]"
           >
             <LogOutIcon className="h-[15px] w-[15px]" />
             Cerrar sesión

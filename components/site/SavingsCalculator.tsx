@@ -49,7 +49,7 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
           </span>
           <h2 className="text-[clamp(28px,4vw,44px)]">¿Cuánto se te va en moverte?</h2>
           <p className="mt-4 text-[15.5px] leading-relaxed text-[var(--ink-soft)]">
-            Poné lo que gastás por semana en nafta, colectivo o remis. Te decimos en cuánto tiempo
+            Poné lo que gastás por semana en nafta, colectivo o remis y te digo en cuánto tiempo
             el vehículo se termina de pagar solo.
           </p>
         </div>
@@ -121,8 +121,8 @@ export function SavingsCalculator({ productos }: { productos: Producto[] }) {
                   Con ese gasto, este modelo tardaría más de 5 años en pagarse solo.
                 </p>
                 <p className="mt-3 text-[14px] text-[var(--ink-soft)]">
-                  Probá con un modelo más accesible, o escribinos y te ayudamos a encontrar el que
-                  sí te cierra.
+                  Probá con un modelo más accesible, o escribime y te ayudo a encontrar el que sí
+                  te cierra.
                 </p>
               </div>
             ) : (

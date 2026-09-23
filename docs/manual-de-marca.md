@@ -55,6 +55,26 @@ Esto no es marketing, es lo que efectivamente ofrece:
 
 ## 6. Tono de voz
 
+**La regla que manda: hablamos en primera persona**
+
+La web es Brahian hablando, no alguien contando qué hace Brahian. Es marca
+personal: si la página habla de él en tercera persona, suena a empresa con
+vendedores, que es exactamente lo contrario de lo que lo diferencia.
+
+| Nunca | Siempre |
+|---|---|
+| "Te atiende Brahian" | "Te atiendo yo" |
+| "Brahian te asesora" | "Te asesoro yo" |
+| "Coordinamos el envío" | "Lo coordino con vos" |
+| "Escribinos por WhatsApp" | "Escribime por WhatsApp" |
+| "Te decimos cuál te conviene" | "Te digo cuál te conviene" |
+
+El plural solo se usa cuando incluye al cliente: *"lo coordinamos juntos"* está
+bien, porque ahí el "nosotros" son Brahian y quien compra.
+
+Única excepción: el nombre de la marca en el logo, los títulos de página y el
+pie. Ahí "Brahian González" es la firma, no la voz.
+
 **Cómo hablamos**
 
 - De vos. Argentino. Como un conocido que entiende del tema.

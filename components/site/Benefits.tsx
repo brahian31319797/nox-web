@@ -1,15 +1,15 @@
 import { CoinsIcon, ShieldIcon, TruckIcon } from "@/components/site/icons";
 
 /**
- * Los tres diferenciales reales del manual de marca §4, escritos como los diría
- * Brahian. `money` marca el que habla de plata a favor del cliente: ese va en
+ * Los tres diferenciales reales del manual de marca §4, en primera persona:
+ * la web habla con la voz de Brahian, no habla *sobre* él. `money` marca el que habla de plata a favor del cliente: ese va en
  * verde, el color que le estamos enseñando a asociar con "esto me conviene".
  */
 const BENEFITS = [
   {
     icon: TruckIcon,
     title: "Envío a todo el país",
-    desc: "Lo coordinamos con vos y te decimos el plazo real antes de que pagues nada.",
+    desc: "Lo coordino con vos y te digo el plazo real antes de que pagues nada.",
     money: false,
   },
   {
@@ -20,8 +20,8 @@ const BENEFITS = [
   },
   {
     icon: ShieldIcon,
-    title: "Te atiende Brahian, no un bot",
-    desc: "Le escribís y te contesta él. Si el modelo que elegiste no te sirve, te lo dice.",
+    title: "Te atiendo yo, no un bot",
+    desc: "Me escribís y te contesto yo. Si el modelo que elegiste no te sirve, te lo digo.",
     money: false,
   },
 ];

@@ -63,7 +63,7 @@ export function Hero() {
             <li aria-hidden className="hidden text-[var(--ink-faint)] sm:block">·</li>
             <li>Envío a todo el país</li>
             <li aria-hidden className="hidden text-[var(--ink-faint)] sm:block">·</li>
-            <li>Te asesora Brahian, no un bot</li>
+            <li>Te asesoro yo, no un bot</li>
           </ul>
         </div>
       </div>

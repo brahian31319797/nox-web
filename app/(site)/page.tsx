@@ -68,8 +68,8 @@ export default async function HomePage() {
           <div className="mx-auto max-w-[640px] rounded-[18px] border border-[var(--line)] bg-[var(--surface)] p-8 text-center">
             <h2 className="text-[22px]">No pudimos cargar el catálogo</h2>
             <p className="mx-auto mt-3 max-w-[44ch] text-[14.5px] leading-relaxed text-[var(--ink-soft)]">
-              Es un problema nuestro, no tuyo. Escribinos por WhatsApp y te pasamos los modelos
-              disponibles al momento.
+              Es un problema mío, no tuyo. Escribime por WhatsApp y te paso los modelos que tengo
+              disponibles.
             </p>
             <a
               href={buildGeneralWhatsAppUrl()}
@@ -92,8 +92,8 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-[1180px] overflow-hidden rounded-[26px] bg-[var(--accent)] px-6 py-12 text-center text-[var(--accent-ink)] md:px-11">
           <h2 className="text-[clamp(26px,4vw,40px)]">¿No sabés cuál te sirve?</h2>
           <p className="mx-auto my-3.5 max-w-[46ch] text-[rgba(10,10,11,0.75)]">
-            Contale a Brahian cuánto andás por día y te dice cuál te conviene. Si ninguno te cierra,
-            también te lo va a decir.
+            Contame cuánto andás por día y te digo cuál te conviene. Si ninguno te cierra, también
+            te lo voy a decir.
           </p>
           <a
             href={buildGeneralWhatsAppUrl()}
@@ -102,7 +102,7 @@ export default async function HomePage() {
             className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-[22px] py-[13px] text-[15px] font-bold text-[var(--canvas)] transition-transform hover:-translate-y-0.5"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
-            Escribir por WhatsApp
+            Escribirme por WhatsApp
           </a>
         </div>
       </section>

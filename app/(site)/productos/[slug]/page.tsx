@@ -9,7 +9,7 @@ import { buildProductWhatsAppUrl, INSTAGRAM_URL } from "@/lib/whatsapp";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const producto = await getProductoBySlug(slug);
-  return { title: producto ? `${producto.nombre} — Brahian González` : "Producto no encontrado" };
+  return { title: producto ? producto.nombre : "Producto no encontrado" };
 }
 
 export default async function ProductoPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,7 +21,7 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
     <main className="mx-auto max-w-[1180px] px-5 pb-16 pt-8">
       <Link
         href="/productos"
-        className="mb-6 inline-flex items-center gap-1.5 font-mono text-xs text-[var(--ink-soft)] hover:text-[var(--accent-2)]"
+        className="-ml-2 mb-4 inline-flex min-h-[44px] items-center gap-1.5 px-2 font-mono text-xs text-[var(--ink-soft)] hover:text-[var(--accent-2)] md:mb-6 md:min-h-0 md:px-0"
       >
         <ArrowLeftIcon className="h-3.5 w-3.5" />
         Volver al catálogo

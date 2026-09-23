@@ -35,7 +35,7 @@ export function ProductsExplorer({
 
   return (
     <>
-      <div className="sticky top-16 z-20 -mx-5 border-b border-[var(--line)] bg-[var(--canvas)]/90 px-5 py-4 backdrop-blur-md">
+      <div className="sticky top-16 z-20 border-b border-[var(--line)] bg-[var(--canvas)]/90 px-5 py-4 backdrop-blur-md">
         <div className="mx-auto max-w-[1180px]">
           <div className="flex h-[52px] items-center gap-2.5 rounded-[13px] border-[1.5px] border-[var(--line)] bg-[var(--surface)] px-4 shadow-sm focus-within:border-[var(--accent)] focus-within:shadow-[0_0_0_4px_rgba(255,90,31,.18)]">
             <SearchIcon className="h-[19px] w-[19px] flex-none text-[var(--ink-faint)]" />
@@ -44,7 +44,7 @@ export function ProductsExplorer({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar modelo, categoría, potencia…"
-              className="w-full bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--ink-faint)]"
+              className="h-full w-full bg-transparent text-base text-[var(--ink)] outline-none placeholder:text-[var(--ink-faint)]"
             />
             {query && (
               <button
@@ -83,7 +83,7 @@ export function ProductsExplorer({
           <div className="py-16 text-center text-[var(--ink-soft)]">
             <SearchIcon className="mx-auto mb-3.5 h-11 w-11 text-[var(--ink-faint)]" />
             <h3 className="mb-1.5 font-display text-lg font-bold">Sin resultados</h3>
-            <p>No encontramos productos para tu búsqueda. Probá con otra palabra.</p>
+            <p>No encontré productos para tu búsqueda. Probá con otra palabra.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3 pb-16 md:grid-cols-3 md:gap-[18px]">
@@ -111,7 +111,7 @@ function FilterChip({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border-[1.5px] px-4 py-2 text-[13.5px] font-semibold transition-colors ${
+      className={`inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-full border-[1.5px] px-4 py-2 text-[13.5px] font-semibold transition-colors md:min-h-0 ${
         active
           ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]"
           : "border-[var(--line)] text-[var(--ink-soft)] hover:border-[var(--line-strong)] hover:text-[var(--ink)]"

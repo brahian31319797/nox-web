@@ -2,7 +2,7 @@ import { ProductsExplorer } from "@/components/site/ProductsExplorer";
 import { getCategorias, getProductosPublicados } from "@/lib/productos";
 
 export const metadata = {
-  title: "Productos — Brahian González",
+  title: "Productos",
 };
 
 export default async function ProductosPage({
